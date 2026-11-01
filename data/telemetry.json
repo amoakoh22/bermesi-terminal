@@ -5,7 +5,7 @@
     "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
     "status": "OPERATIONAL_AUTONOMOUS",
     "host": "Windows Dedicated Host (24/7 Always-On)",
-    "lastSyncGMT": "14:58 GMT",
+    "lastSyncGMT": "15:15 GMT",
     "dualBrain": {
       "planner": "Gemini 4 Argon (Medium)",
       "execution": "Gemini 3.8 Flash (Medium)"
@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "14:58 GMT",
+    "currentTimeGMT": "15:15 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "15:15 GMT: Racing Santander vs Real Madrid (Ticket 1 Leg 1 - LINEUPS CONFIRMED); 16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal",
+    "nextMilestone": "15:15 GMT: Racing Santander vs Real Madrid (LIVE); 16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal O1.5",
     "isCashoutWindowActive": true
   },
   "equityHistory": [
@@ -45,11 +45,11 @@
       "tier": "Ticket 1 (Plan A)",
       "name": "The Vault Grinder",
       "allocation": "5.0u (GHS 100.00)",
-      "structure": "2-Leg Anchor Multiple: Real Madrid ML (1.24) + Lyon ML (1.46)",
-      "odds": "1.81",
-      "status": "LINEUPS_CONFIRMED_15:15_GMT",
+      "structure": "2-Leg Anchor Multiple: Real Madrid ML (1.23) + Lyon ML (1.42)",
+      "odds": "1.75",
+      "status": "ACTIVE_IN_PLAY",
       "pnl": 0,
-      "targetPayout": 181.04,
+      "targetPayout": 174.66,
       "objective": "Capital Defense & Base Growth (Recovers 80-90% daily slate)"
     },
     {
@@ -58,7 +58,7 @@
       "allocation": "3.0u (GHS 60.00)",
       "structure": "3 Independent Singles: Lazio (1.48) + Celtics -5.5 (1.75) + Pacers ML (1.62)",
       "odds": "1.48 - 1.75",
-      "status": "STAGED_EVENING",
+      "status": "ACTIVE_DEPLOYED",
       "pnl": 0,
       "targetPayout": 102.2,
       "objective": "Linear Alpha Generation without correlation risk (Cap under -9.5)"
@@ -114,6 +114,30 @@
       "cashoutRatio": 1.00,
       "cashoutTriggerMet": false,
       "decision": "HOLD_FOR_LIV_ARS_KICKOFF"
+    },
+    {
+      "ticketId": "SB-GH-20261101-T1",
+      "tier": "Ticket 1 (Plan A: The Vault Grinder)",
+      "stake": 100.00,
+      "legs": [
+        {
+          "match": "Racing Santander vs Real Madrid",
+          "selection": "Real Madrid to Win (Away)",
+          "odds": 1.23,
+          "kickoff": "15:15 GMT (LIVE)",
+          "status": "IN_PLAY"
+        },
+        {
+          "match": "Olympique Lyonnais vs Angers SCO",
+          "selection": "Lyon to Win (Home)",
+          "odds": 1.42,
+          "kickoff": "16:15 GMT",
+          "status": "PENDING"
+        }
+      ],
+      "combinedOdds": 1.75,
+      "potentialReturn": 174.66,
+      "status": "ACTIVE_IN_PLAY"
     }
   ],
   "incidents": [
@@ -136,6 +160,11 @@
   ],
   "decisionFeed": [
     {
+      "time": "15:15 GMT",
+      "actor": "Gemini 3.8 Flash (Execution)",
+      "action": "Deployed Complete Sunday Slate Execution Matrix: Ticket 1 (Real Madrid 1.23 + Lyon 1.42 @ GHS 100), Singles Matrix (Lazio, Celtics -5.5, Pacers ML @ GHS 60), and Ticket 4 (GHS 10)."
+    },
+    {
       "time": "14:58 GMT",
       "actor": "Gemini 4 Argon (Planner)",
       "action": "Lineup Confirmed (15:15 GMT): Real Madrid Starting XI verified at Estadio El Sardinero: Mbappé, Bellingham, Güler, Silva, Tchouaméni, Alexander-Arnold, Courtois. Win model probability locked at 82.2%."
@@ -144,11 +173,6 @@
       "time": "13:30 GMT",
       "actor": "Gemini 3.8 Flash (Execution)",
       "action": "Como 1907 vs Venezia FC concluded 1–0 FT (Da Cunha 43'). Leg 1 of Ticket 3 OFFICIALLY SETTLED & WON. Cashout equity elevated to GHS 13.30."
-    },
-    {
-      "time": "11:28 GMT",
-      "actor": "Gemini 3.8 Flash (Execution)",
-      "action": "Autonomously executed Sunday Wave 1 Multiple: Como 1907 vs Venezia FC (1.33) + Liverpool vs Arsenal Over 1.5 Goals (1.28). Verified active in SportyBet Open Bets."
     }
   ]
 }
