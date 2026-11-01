@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "12:57 GMT",
+    "currentTimeGMT": "13:02 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "13:20 GMT FT Verification: Como 1907 vs Venezia (1-0 2H); 14:00 GMT Kickoff: S.S. Lazio vs Cagliari",
+    "nextMilestone": "13:20 GMT FT Verification: Como vs Venezia (1-0 90'+); 14:00 GMT Kickoff: S.S. Lazio vs Cagliari (Lineups CONFIRMED)",
     "isCashoutWindowActive": true
   },
   "portfolio": [
@@ -112,6 +112,12 @@
     "lastCalibrationEvent": "Added Immediate Cup-Rematch Filter; Enforced -9.5 NBA Spread Cap; Verified 4-1 FT Settlement."
   },
   "recentDecisions": [
+    {
+      "time": "13:02 GMT",
+      "type": "LINEUP_VERIFIED_UPGRADE",
+      "brain": "Gemini 4 Argon (Planner)",
+      "summary": "T-Minus 58m Lineup Audit: S.S. Lazio vs Cagliari Calcio CONFIRMED. Gattuso fielding full-strength 4-3-3 (Zaccagni, Noslin, Isaksen in attack; Frattesi, Taylor in midfield; Tavares at LB). Cagliari starting Yerry Mina and Caprile. Single 2A (Lazio Home Win @ 1.52) status upgraded to MAXIMUM_CONFIDENCE."
+    },
     {
       "time": "11:05 GMT",
       "type": "INCIDENT_DISCLOSURE",
