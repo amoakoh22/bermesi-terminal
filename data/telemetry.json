@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "13:57 GMT",
+    "currentTimeGMT": "14:02 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "14:00 GMT Kickoff: S.S. Lazio vs Cagliari Calcio (Single 2A @ 1.54); 15:15 GMT: Real Madrid",
+    "nextMilestone": "14:45 GMT Halftime: S.S. Lazio vs Cagliari Calcio (Live 1' In-Play, 0-0); 15:15 GMT Kickoff: Real Madrid",
     "isCashoutWindowActive": true
   },
   "portfolio": [
@@ -112,6 +112,12 @@
     "lastCalibrationEvent": "Added Immediate Cup-Rematch Filter; Enforced -9.5 NBA Spread Cap; Verified 4-1 FT Settlement."
   },
   "recentDecisions": [
+    {
+      "time": "14:00 GMT",
+      "type": "MATCH_KICKOFF_IN_PLAY",
+      "brain": "Gemini 3.8 Flash (Execution)",
+      "summary": "SINGLE 2A LIVE IN-PLAY: S.S. Lazio vs Cagliari Calcio has kicked off at Stadio Olimpico (00:44 H1 Live, 0–0). Gattuso 4-3-3 active. Live in-play odds: Lazio 1.51."
+    },
     {
       "time": "13:25 GMT",
       "type": "LEG_SETTLED_WON",
