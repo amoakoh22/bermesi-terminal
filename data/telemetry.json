@@ -5,7 +5,7 @@
     "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
     "status": "OPERATIONAL_AUTONOMOUS",
     "host": "Windows Dedicated Host (24/7 Always-On)",
-    "lastSyncGMT": "03:51 GMT",
+    "lastSyncGMT": "10:20 GMT",
     "dualBrain": {
       "planner": "Gemini 4 Argon (Medium)",
       "execution": "Gemini 3.8 Flash (Medium)"
@@ -14,64 +14,79 @@
   "financials": {
     "currency": "GHS",
     "initialCapitalInjected": 250,
-    "currentVaultBalance": 386.28,
-    "netProfit": 136.28,
-    "roiPercent": 54.51,
+    "currentVaultBalance": 386.46,
+    "netProfit": 136.46,
+    "roiPercent": 54.58,
     "projectedArrPercent": 384.2,
-    "winRatePercent": 78.6,
+    "winRatePercent": 81.2,
     "avgCashoutEquityCapturedPercent": 93.6,
     "baseUnit": 20,
     "dailyDeploymentStake": 200,
-    "liquidVaultReserve": 186.28,
+    "liquidVaultReserve": 186.46,
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "03:51 GMT",
-    "activePhase": "REST_OR_OVERNIGHT_MONITORING",
-    "nextMilestone": "08:00 GMT - Morning Post-Mortem & Vault Ledger Sync",
+    "currentTimeGMT": "10:20 GMT",
+    "activePhase": "PHASE_2_BLUEPRINT_GENERATION",
+    "nextMilestone": "Kickoff Waves (T-45m) - Pre-Match Starting XI Gate",
     "isCashoutWindowActive": false
   },
   "portfolio": [
     {
       "tier": "Ticket 1 (Plan A)",
       "name": "The Vault Grinder",
-      "allocation": "5u (GHS 100)",
-      "structure": "2-Leg Anchor Multiple",
-      "odds": "1.55 - 1.80",
-      "status": "SETTLED_WON",
-      "pnl": 65,
+      "allocation": "5.0u (GHS 100.00)",
+      "structure": "2-Leg Anchor Multiple: Real Madrid ML (1.24) + Lyon ML (1.38)",
+      "odds": "1.71",
+      "status": "PENDING_DEPLOYMENT",
+      "pnl": 0,
+      "targetPayout": 171,
       "objective": "Capital Defense & Base Growth (Recovers 80-90% daily slate)"
     },
     {
       "tier": "Ticket 2 (Plan B)",
       "name": "Sharp Singles Matrix",
-      "allocation": "3u (GHS 60)",
-      "structure": "3 Independent Singles (1.0u each: 2A, 2B, 2C)",
-      "odds": "1.55 - 1.90",
-      "status": "SETTLED_PROFITABLE",
-      "pnl": 21.6,
-      "objective": "Linear Alpha Generation without correlation risk"
+      "allocation": "3.0u (GHS 60.00)",
+      "structure": "3 Independent Singles: Lazio (1.48) + Celtics -5.5 (1.75) + Lakers -4.5 (1.88)",
+      "odds": "1.48 - 1.88",
+      "status": "PENDING_DEPLOYMENT",
+      "pnl": 0,
+      "targetPayout": 102.2,
+      "objective": "Linear Alpha Generation without correlation risk (Cap under -9.5)"
     },
     {
       "tier": "Ticket 3 (Plan C)",
       "name": "Cross-Sport Multiplier",
-      "allocation": "1.5u (GHS 30)",
-      "structure": "3-Leg Cross-Sport Multiple (2 Early Football + 1 Late NBA)",
-      "odds": "Dynamic",
-      "status": "CASHED_OUT_LOCK",
-      "pnl": 27.39,
-      "cashoutRatio": 93.6,
-      "objective": "Equity Compounding & Pre-NBA Cashout (> 2.00x settled equity)"
+      "allocation": "1.5u (GHS 30.00)",
+      "structure": "Como ML (1.34 @ 11:30) + LIV-ARS O1.5 (1.25 @ 16:30) + Pacers ML (1.58 @ 22:00)",
+      "odds": "2.65",
+      "status": "ARMED_EARLY_KICKOFF",
+      "pnl": 0,
+      "targetPayout": 79.5,
+      "objective": "Equity Compounding & Pre-NBA Cashout Lock (> 2.00x settled equity by 18:25 GMT)"
     },
     {
       "tier": "Ticket 4 (Plan D)",
       "name": "Chronological Arbitrage",
-      "allocation": "0.5u (GHS 10)",
-      "structure": "3-Leg Staggered Time Multiple (Early + Mid + Late)",
-      "odds": "Leverage",
-      "status": "SETTLED_LOSS",
-      "pnl": -10,
-      "objective": "Low-Risk Leverage & Free In-Play Options"
+      "allocation": "0.5u (GHS 10.00)",
+      "structure": "Frankfurt-HSV O1.5 (1.22) + Marseille 1X (1.24) + Warriors ML (1.72)",
+      "odds": "2.60",
+      "status": "PENDING_DEPLOYMENT",
+      "pnl": 0,
+      "targetPayout": 26,
+      "objective": "Low-Risk Leverage & Free In-Play Options across 3 time windows"
+    },
+    {
+      "tier": "Autonomous Live Test",
+      "name": "In-Play Live Sentinel Slip",
+      "allocation": "GHS 1.00",
+      "structure": "Yokohama F Marinos vs Kawasaki Frontale (1X2 Home Win @ 1.18)",
+      "odds": "1.18",
+      "status": "SETTLED_WON",
+      "pnl": 0.18,
+      "finalScore": "4 - 1 FT",
+      "targetPayout": 1.18,
+      "objective": "Autonomous CDP DOM Order Execution & Live Settlement Verification"
     }
   ],
   "learningIntelligence": {
@@ -89,33 +104,33 @@
         "status": "ACTIVE_HOT_LOADED"
       }
     ],
-    "experienceCount": 15,
-    "lastCalibrationEvent": "Auto-calibrated spread cap and cashout floor via Nous Hermes experience replay."
+    "experienceCount": 16,
+    "lastCalibrationEvent": "Added Immediate Cup-Rematch Filter; Enforced -9.5 NBA Spread Cap; Verified 4-1 FT Settlement."
   },
   "recentDecisions": [
     {
-      "time": "03:51 GMT",
-      "type": "SECURITY",
-      "brain": "Windows DPAPI",
-      "summary": "Vault operational & bound to workstation TPM. 100% security verified."
+      "time": "10:15 GMT",
+      "type": "AUDIT_VERIFIED",
+      "brain": "Gemini 4 Argon (Planner)",
+      "summary": "Verified Yokohama F Marinos vs Kawasaki Frontale actual final score: 4–1 FT (Jeisson Quiñones 69'). Full payout GHS 1.18 credited."
+    },
+    {
+      "time": "09:51 GMT",
+      "type": "MORNING_AUDIT",
+      "brain": "Nous Hermes Core",
+      "summary": "Sunday Morning Slate formulated: 10.0u (GHS 200.00). Reserve protected at GHS 186.46. Como 1907 kickoff armed for 11:30 GMT."
+    },
+    {
+      "time": "05:15 GMT",
+      "type": "LIVE_IN_PLAY_ORDER",
+      "brain": "Gemini 3.8 Flash (Execution)",
+      "summary": "Autonomous in-play placement on Yokohama F Marinos (1X2 @ 1.18). Executed with exact 1.00 GHS stake, zero rules violated."
     },
     {
       "time": "21:30 GMT",
       "type": "CASHOUT",
       "brain": "Gemini 3.8 Flash (Execution)",
       "summary": "Mandatory Cashout Lock: Captured 93.6% true mathematical equity before midnight NBA tip-off."
-    },
-    {
-      "time": "11:00 GMT",
-      "type": "TACTICAL_GATE",
-      "brain": "Gemini 4 Argon (Planner)",
-      "summary": "T-Minus 45m starting lineup gate confirmed. Zero parlay-single overlap enforced."
-    },
-    {
-      "time": "03:16 GMT",
-      "type": "SYNTHESIS",
-      "brain": "Nous Hermes Tool Factory",
-      "summary": "Self-authored and registered new dynamic tool: OddsRatioCalculator."
     }
   ],
   "equityHistory": [
@@ -138,6 +153,10 @@
     {
       "date": "Oct 31",
       "balance": 354.68
+    },
+    {
+      "date": "Nov 01",
+      "balance": 386.46
     }
   ]
 }
