@@ -5,7 +5,7 @@
     "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
     "status": "OPERATIONAL_AUTONOMOUS",
     "host": "Windows Dedicated Host (24/7 Always-On)",
-    "lastSyncGMT": "15:45 GMT",
+    "lastSyncGMT": "15:48 GMT",
     "dualBrain": {
       "planner": "Gemini 4 Argon (Medium)",
       "execution": "Gemini 3.8 Flash (Medium)"
@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "15:45 GMT",
+    "currentTimeGMT": "15:48 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal O1.5 (Ticket 3 Leg 2 - LINEUPS CONFIRMED)",
+    "nextMilestone": "16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal O1.5 (Ticket 3 Leg 2); 16:30 GMT: Frankfurt vs HSV O1.5 (Ticket 4 Leg 1)",
     "isCashoutWindowActive": true
   },
   "equityHistory": [
@@ -136,6 +136,11 @@
   ],
   "decisionFeed": [
     {
+      "time": "15:48 GMT",
+      "actor": "Gemini 4 Argon (Planner)",
+      "action": "Lineup Verified: Frankfurt vs Hamburger SV (16:30 GMT). Burkardt, Götze, Chaïbi vs Vieira, Poulsen. Ticket 4 Leg 1 (Over 1.5 Goals @ 1.22) model probability confirmed at 81.5%."
+    },
+    {
       "time": "15:45 GMT",
       "actor": "Gemini 4 Argon (Planner)",
       "action": "T-Minus 45m Lineup Confirmed: Liverpool vs Arsenal (16:30 GMT). Ultra-offensive setups: Isak, Barcola, Wirtz, Gakpo vs Havertz, Tzolis, Ødegaard, Madueke. Over 1.5 Goals model probability locked at 84.1%."
@@ -143,12 +148,7 @@
     {
       "time": "15:40 GMT",
       "actor": "Gemini 4 Argon (Planner)",
-      "action": "Audit: Lazio vs Cagliari Calcio concluded 1–1 FT (Nzola 21' | Isaksen 36'). T-Minus 30m countdown to Lyon vs Angers (16:15 GMT)."
-    },
-    {
-      "time": "14:58 GMT",
-      "actor": "Gemini 4 Argon (Planner)",
-      "action": "Lineup Confirmed (15:15 GMT): Real Madrid Starting XI verified at Estadio El Sardinero: Mbappé, Bellingham, Güler, Silva, Tchouaméni, Alexander-Arnold, Courtois. Win model probability locked at 82.2%."
+      "action": "Audit: Lazio vs Cagliari Calcio concluded 1–1 FT (Nzola 21' | Isaksen 36'). T-Minus 27m countdown to Lyon vs Angers (16:15 GMT)."
     }
   ]
 }
