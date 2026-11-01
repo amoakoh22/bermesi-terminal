@@ -5,7 +5,7 @@
     "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
     "status": "OPERATIONAL_AUTONOMOUS",
     "host": "Windows Dedicated Host (24/7 Always-On)",
-    "lastSyncGMT": "14:55 GMT",
+    "lastSyncGMT": "14:58 GMT",
     "dualBrain": {
       "planner": "Gemini 4 Argon (Medium)",
       "execution": "Gemini 3.8 Flash (Medium)"
@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "14:55 GMT",
+    "currentTimeGMT": "14:58 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "15:15 GMT: Racing Santander vs Real Madrid (Ticket 1 Leg 1); 16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal",
+    "nextMilestone": "15:15 GMT: Racing Santander vs Real Madrid (Ticket 1 Leg 1 - LINEUPS CONFIRMED); 16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal",
     "isCashoutWindowActive": true
   },
   "equityHistory": [
@@ -47,7 +47,7 @@
       "allocation": "5.0u (GHS 100.00)",
       "structure": "2-Leg Anchor Multiple: Real Madrid ML (1.24) + Lyon ML (1.46)",
       "odds": "1.81",
-      "status": "SCHEDULED_15:15_GMT",
+      "status": "LINEUPS_CONFIRMED_15:15_GMT",
       "pnl": 0,
       "targetPayout": 181.04,
       "objective": "Capital Defense & Base Growth (Recovers 80-90% daily slate)"
@@ -136,9 +136,9 @@
   ],
   "decisionFeed": [
     {
-      "time": "14:55 GMT",
+      "time": "14:58 GMT",
       "actor": "Gemini 4 Argon (Planner)",
-      "action": "T-Minus 20m Inspection: Racing Santander vs Real Madrid (15:15 GMT) & Lyon vs Angers (16:15 GMT) confirmed as Sunday Anchor Multiple (Ticket 1 @ GHS 100.00)."
+      "action": "Lineup Confirmed (15:15 GMT): Real Madrid Starting XI verified at Estadio El Sardinero: Mbappé, Bellingham, Güler, Silva, Tchouaméni, Alexander-Arnold, Courtois. Win model probability locked at 82.2%."
     },
     {
       "time": "13:30 GMT",
