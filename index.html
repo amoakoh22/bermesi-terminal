@@ -949,18 +949,37 @@
       setTimeout(() => {
         if (pLower.includes('balance') || pLower.includes('vault')) {
           const bal = globalTelemetry ? globalTelemetry.financials.currentVaultBalance.toFixed(2) : '386.46';
-          const reserve = globalTelemetry ? globalTelemetry.financials.liquidVaultReserve.toFixed(2) : '186.46';
-          appendMessage('agent', `Current Vault Balance is **GHS ${bal}** (Liquid Reserve: **GHS ${reserve}**). Rate of Return: **+54.58% ROI**.`);
+          const reserve = globalTelemetry ? globalTelemetry.financials.liquidVaultReserve.toFixed(2) : '376.46';
+          appendMessage('agent', `Current Vault Balance is **GHS ${bal}** (Liquid Reserve: **GHS ${reserve}**, In-Play: **GHS 10.00**). Rate of Return: **+54.58% ROI**.`);
+        } else if (pLower.includes('what next') || pLower.includes('what would you do next') || pLower.includes('next') || pLower.includes('action') || pLower.includes('roadmap')) {
+          appendMessage('agent', `**Immediate Bermesi Operational Roadmap:**<br>` +
+            `1. <b>14:00 GMT Kickoff:</b> Deploy <b>Single 2A</b> (S.S. Lazio vs Cagliari Calcio Home Win @ 1.52, GHS 20.00 stake).<br>` +
+            `2. <b>15:15 & 16:15 GMT:</b> Deploy <b>Ticket 1 (Plan A: The Vault Grinder)</b>: Real Madrid ML (1.24) + Lyon ML (1.46) @ 1.81 (GHS 100.00 stake).<br>` +
+            `3. <b>16:30 GMT:</b> Deploy <b>Ticket 4 (Plan D: Chrono Arbitrage)</b>: Frankfurt O1.5 + Marseille 1X + Warriors ML @ 2.60 (GHS 10.00 stake).<br>` +
+            `4. <b>18:25 - 21:50 GMT:</b> Real-time equity telemetry on Ticket 3 (Como + LIV-ARS O1.5); trigger <b>Mandatory Cashout Lock</b> if offer &ge; 92% true equity.<br>` +
+            `5. <b>22:00 GMT:</b> Deploy <b>Single 2C / Ticket 3 Completion</b> (Indiana Pacers ML @ 1.62, GHS 20.00 stake) to fulfill Plan C cross-sport multiplier.`);
+        } else if (pLower.includes('incident') || pLower.includes('pacers') || pLower.includes('como')) {
+          appendMessage('agent', `<b>Ticket 3 Wave 1 Incident Log:</b> NBA Pacers ML had a DOM hydration race condition during rapid pre-kickoff navigation (<2 min to 11:30 GMT). To protect the entry, Como + LIV-ARS O1.5 was locked at GHS 10.00. The remaining GHS 20.00 is designated for Pacers ML (Single 2C) prior to 22:00 GMT tip-off.`);
         } else if (pLower.includes('slate') || pLower.includes('ticket') || pLower.includes('sunday')) {
-          appendMessage('agent', `Sunday Slate Loaded (10.0u / GHS 200):\n• **Ticket 1 (Plan A - GHS 100)**: Real Madrid (1.24) + Lyon (1.38) @ 1.71\n• **Singles (Plan B - GHS 60)**: Lazio (1.48) + Celtics -5.5 (1.75) + Lakers -4.5 (1.88)\n• **Ticket 3 (Plan C - GHS 30)**: Como (1.34 @ 11:30) + LIV-ARS O1.5 (1.25) + Pacers (1.58)\n• **Ticket 4 (Plan D - GHS 10)**: Frankfurt O1.5 + Marseille 1X + Warriors\n*Note: Como 1907 kicks off at 11:30 GMT!*`);
+          appendMessage('agent', `Sunday Slate Loaded (10.0u / GHS 200.00):<br>` +
+            `• <b>Ticket 1 (Plan A - GHS 100)</b>: Real Madrid (1.24) + Lyon (1.46) @ 1.81 (15:15 GMT)<br>` +
+            `• <b>Single 2A (Plan B - GHS 20)</b>: S.S. Lazio to Win @ 1.52 (14:00 GMT)<br>` +
+            `• <b>Single 2B (Plan B - GHS 20)</b>: Boston Celtics -5.5 @ 1.75 (20:30 GMT)<br>` +
+            `• <b>Single 2C (Plan B - GHS 20)</b>: Indiana Pacers ML @ 1.62 (22:00 GMT)<br>` +
+            `• <b>Ticket 3 (Plan C - GHS 10 Active + GHS 20 Staged)</b>: Como ML + LIV-ARS O1.5 + Pacers ML<br>` +
+            `• <b>Ticket 4 (Plan D - GHS 10)</b>: Frankfurt O1.5 + Marseille 1X + Warriors ML (16:30 GMT)`);
         } else if (pLower.includes('yokohama') || pLower.includes('score')) {
-          appendMessage('agent', `Verified Final Outcome: **Yokohama F. Marinos defeated Kawasaki Frontale 4–1 FT** at Nissan Stadium (Tono 12', Kondo 28', Tanimura 41', Quiñones 69'). Full payout of **GHS 1.18** settled to vault.`);
+          appendMessage('agent', `Verified Final Outcome: <b>Yokohama F. Marinos defeated Kawasaki Frontale 4–1 FT</b> at Nissan Stadium (Tono 12', Kondo 28', Tanimura 41', Quiñones 69'). Full payout of <b>GHS 1.18</b> settled to vault.`);
         } else if (pLower.includes('cashout')) {
-          appendMessage('agent', `Cashout Sentinel active: Mandatory trigger floor is strictly locked at **&ge; 92.0% true mathematical equity**. Ticket 3 pre-NBA cashout window opens between 18:25 and 21:50 GMT.`);
+          appendMessage('agent', `Cashout Sentinel active: Mandatory trigger floor is strictly locked at <b>&ge; 92.0% true mathematical equity</b>. Ticket 3 pre-NBA cashout window opens between 18:25 and 21:50 GMT.`);
         } else if (pLower.includes('heuristic') || pLower.includes('rule')) {
-          appendMessage('agent', `Active Learned Heuristics:\n1. NBA Spread Cap: strictly capped under -9.5 (Celtics -5.5, Lakers -4.5).\n2. Immediate Cup-Rematch Filter: Frankfurt removed from singles; replaced with Lazio.\n3. Cashout lock: &ge; 92% equity.\n4. Mandate: Flexi, 1UP, EarlyGoals remain unchecked.`);
+          appendMessage('agent', `Active Learned Heuristics:<br>` +
+            `1. NBA Spread Cap: strictly capped under -9.5 (Celtics -5.5, Lakers -4.5).<br>` +
+            `2. Immediate Cup-Rematch Filter: Frankfurt removed from singles; replaced with Lazio.<br>` +
+            `3. Cashout lock: &ge; 92% equity.<br>` +
+            `4. Mandate: Flexi, 1UP, EarlyGoals remain unchecked.`);
         } else {
-          appendMessage('agent', `Instruction received: "${promptText}". Bermesi cognitive harness is armed. Standing by for kickoff gates at 11:30 GMT (Como vs Venezia).`);
+          appendMessage('agent', `Instruction received: "${promptText}". Bermesi cognitive harness is armed. Active Live Position: Ticket 3 Wave 1 (Como vs Venezia). Next target kickoff: S.S. Lazio vs Cagliari at 14:00 GMT.`);
         }
       }, 500);
     }

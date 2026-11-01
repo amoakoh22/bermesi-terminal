@@ -113,6 +113,12 @@
   },
   "recentDecisions": [
     {
+      "time": "11:05 GMT",
+      "type": "INCIDENT_DISCLOSURE",
+      "brain": "Gemini 4 Argon (Planner)",
+      "summary": "TICKET 3 DEPLOYMENT VARIANCE: NBA Pacers ML leg encountered DOM hydration delay during pre-kickoff execution (<2m to Como 11:30 GMT). Defensive order locked at 2 legs @ GHS 10.00 to guarantee entry. Action Taken: Remaining GHS 20.00 assigned to Pacers ML (Single 2C) prior to 22:00 GMT tip-off to preserve exact Plan C equity compounding."
+    },
+    {
       "time": "11:02 GMT",
       "type": "ORDER_PLACED_AUTONOMOUS",
       "brain": "Gemini 3.8 Flash (Execution)",
