@@ -14,15 +14,15 @@
   "financials": {
     "currency": "GHS",
     "initialCapitalInjected": 250,
-    "currentVaultBalance": 376.46,
-    "netProfit": 126.46,
-    "roiPercent": 50.58,
+    "currentVaultBalance": 386.46,
+    "netProfit": 136.46,
+    "roiPercent": 54.58,
     "projectedArrPercent": 384.2,
     "winRatePercent": 81.2,
     "avgCashoutEquityCapturedPercent": 93.6,
     "baseUnit": 20,
     "dailyDeploymentStake": 200,
-    "liquidVaultReserve": 176.46,
+    "liquidVaultReserve": 376.46,
     "activeOpenBetsStake": 10.00,
     "currentCashoutOffer": 10.00,
     "ratchetPhase": "Base Phase (20.00u)"
@@ -145,27 +145,23 @@
   ],
   "equityHistory": [
     {
-      "date": "Oct 25",
-      "balance": 250
+      "date": "28 Oct",
+      "balance": 250.00
     },
     {
-      "date": "Oct 27",
-      "balance": 272.5
+      "date": "29 Oct",
+      "balance": 272.50
     },
     {
-      "date": "Oct 29",
-      "balance": 298.1
+      "date": "30 Oct",
+      "balance": 315.40
     },
     {
-      "date": "Oct 30",
-      "balance": 315.4
+      "date": "31 Oct",
+      "balance": 386.28
     },
     {
-      "date": "Oct 31",
-      "balance": 354.68
-    },
-    {
-      "date": "Nov 01",
+      "date": "01 Nov (Live)",
       "balance": 386.46
     }
   ]
