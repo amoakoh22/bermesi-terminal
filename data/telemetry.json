@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "13:22 GMT",
+    "currentTimeGMT": "13:27 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "13:25 GMT FT Whistle: Como 1907 vs Venezia FC (90'+ Live, 1-0 Como, odds 1.03); 14:00 GMT Kickoff: S.S. Lazio vs Cagliari (Odds 1.56)",
+    "nextMilestone": "14:00 GMT Kickoff: S.S. Lazio vs Cagliari Calcio (Single 2A @ 1.56); 15:15 GMT: Real Madrid",
     "isCashoutWindowActive": true
   },
   "portfolio": [
@@ -58,14 +58,14 @@
     },
     {
       "tier": "Ticket 3 (Plan C)",
-      "name": "Cross-Sport Multiplier (Wave 1 Active)",
+      "name": "Cross-Sport Multiplier (Leg 1 WON)",
       "allocation": "1.5u (GHS 30.00)",
-      "structure": "Como ML (1.33 @ 11:30) + LIV-ARS O1.5 (1.28 @ 16:30) + Pacers ML (1.62 @ 22:00)",
+      "structure": "Como ML (1.33 - WON 1-0 FT) + LIV-ARS O1.5 (1.28 @ 16:30) + Pacers ML (1.62 @ 22:00)",
       "odds": "2.76",
-      "status": "ACTIVE_IN_PLAY",
+      "status": "LEG_1_CLEARED_WON",
       "pnl": 0,
       "stakePlaced": 10.00,
-      "currentCashout": 10.00,
+      "currentCashout": 13.30,
       "targetPayout": 79.5,
       "objective": "Equity Compounding & Pre-NBA Cashout Lock (> 2.00x settled equity by 18:25 GMT)"
     },
@@ -112,6 +112,12 @@
     "lastCalibrationEvent": "Added Immediate Cup-Rematch Filter; Enforced -9.5 NBA Spread Cap; Verified 4-1 FT Settlement."
   },
   "recentDecisions": [
+    {
+      "time": "13:25 GMT",
+      "type": "LEG_SETTLED_WON",
+      "brain": "Gemini 3.8 Flash (Execution)",
+      "summary": "TICKET 3 (LEG 1) WON & SETTLED: Como 1907 defeats Venezia FC 1–0 FT at Stadio Giuseppe Sinigaglia (Lucas Da Cunha 43'). Leg 1 odds @ 1.33 cleared. Ticket 3 advances to Leg 2 (Liverpool vs Arsenal Over 1.5 Goals @ 16:30 GMT). Equity multiplier unlocked."
+    },
     {
       "time": "13:02 GMT",
       "type": "LINEUP_VERIFIED_UPGRADE",
