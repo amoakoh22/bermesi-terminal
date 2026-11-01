@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "14:02 GMT",
+    "currentTimeGMT": "14:12 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "14:45 GMT Halftime: S.S. Lazio vs Cagliari Calcio (Live 1' In-Play, 0-0); 15:15 GMT Kickoff: Real Madrid",
+    "nextMilestone": "14:45 GMT Halftime: S.S. Lazio vs Cagliari Calcio (Live In-Play, 0-0); 15:15 GMT: Real Madrid",
     "isCashoutWindowActive": true
   },
   "portfolio": [
