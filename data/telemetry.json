@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "13:02 GMT",
+    "currentTimeGMT": "13:07 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "13:20 GMT FT Verification: Como vs Venezia (1-0 90'+); 14:00 GMT Kickoff: S.S. Lazio vs Cagliari (Lineups CONFIRMED)",
+    "nextMilestone": "13:25 GMT FT Settlement: Como 1907 vs Venezia FC (78' Live, 1-0 Como); 14:00 GMT Kickoff: S.S. Lazio vs Cagliari",
     "isCashoutWindowActive": true
   },
   "portfolio": [
