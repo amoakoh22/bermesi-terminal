@@ -5,7 +5,7 @@
     "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
     "status": "OPERATIONAL_AUTONOMOUS",
     "host": "Windows Dedicated Host (24/7 Always-On)",
-    "lastSyncGMT": "15:15 GMT",
+    "lastSyncGMT": "15:40 GMT",
     "dualBrain": {
       "planner": "Gemini 4 Argon (Medium)",
       "execution": "Gemini 3.8 Flash (Medium)"
@@ -28,9 +28,9 @@
     "ratchetPhase": "Base Phase (20.00u)"
   },
   "schedule": {
-    "currentTimeGMT": "15:15 GMT",
+    "currentTimeGMT": "15:40 GMT",
     "activePhase": "PHASE_3_LIVE_EXECUTION",
-    "nextMilestone": "15:15 GMT: Racing Santander vs Real Madrid (LIVE); 16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal O1.5",
+    "nextMilestone": "16:15 GMT: Lyon vs Angers; 16:30 GMT: Liverpool vs Arsenal O1.5 (Ticket 3 Leg 2); 16:30 GMT: Frankfurt vs HSV O1.5",
     "isCashoutWindowActive": true
   },
   "equityHistory": [
@@ -47,7 +47,7 @@
       "allocation": "5.0u (GHS 100.00)",
       "structure": "2-Leg Anchor Multiple: Real Madrid ML (1.23) + Lyon ML (1.42)",
       "odds": "1.75",
-      "status": "ACTIVE_IN_PLAY",
+      "status": "IN_PLAY_SANTANDER_LIVE",
       "pnl": 0,
       "targetPayout": 174.66,
       "objective": "Capital Defense & Base Growth (Recovers 80-90% daily slate)"
@@ -56,9 +56,9 @@
       "tier": "Ticket 2 (Plan B)",
       "name": "Sharp Singles Matrix",
       "allocation": "3.0u (GHS 60.00)",
-      "structure": "3 Independent Singles: Lazio (1.48) + Celtics -5.5 (1.75) + Pacers ML (1.62)",
+      "structure": "3 Independent Singles: Lazio (1.48) [1-1 FT] + Celtics -5.5 (1.75) + Pacers ML (1.62)",
       "odds": "1.48 - 1.75",
-      "status": "ACTIVE_DEPLOYED",
+      "status": "STAGED_EVENING",
       "pnl": 0,
       "targetPayout": 102.2,
       "objective": "Linear Alpha Generation without correlation risk (Cap under -9.5)"
@@ -114,30 +114,6 @@
       "cashoutRatio": 1.00,
       "cashoutTriggerMet": false,
       "decision": "HOLD_FOR_LIV_ARS_KICKOFF"
-    },
-    {
-      "ticketId": "SB-GH-20261101-T1",
-      "tier": "Ticket 1 (Plan A: The Vault Grinder)",
-      "stake": 100.00,
-      "legs": [
-        {
-          "match": "Racing Santander vs Real Madrid",
-          "selection": "Real Madrid to Win (Away)",
-          "odds": 1.23,
-          "kickoff": "15:15 GMT (LIVE)",
-          "status": "IN_PLAY"
-        },
-        {
-          "match": "Olympique Lyonnais vs Angers SCO",
-          "selection": "Lyon to Win (Home)",
-          "odds": 1.42,
-          "kickoff": "16:15 GMT",
-          "status": "PENDING"
-        }
-      ],
-      "combinedOdds": 1.75,
-      "potentialReturn": 174.66,
-      "status": "ACTIVE_IN_PLAY"
     }
   ],
   "incidents": [
@@ -160,9 +136,9 @@
   ],
   "decisionFeed": [
     {
-      "time": "15:15 GMT",
-      "actor": "Gemini 3.8 Flash (Execution)",
-      "action": "Deployed Complete Sunday Slate Execution Matrix: Ticket 1 (Real Madrid 1.23 + Lyon 1.42 @ GHS 100), Singles Matrix (Lazio, Celtics -5.5, Pacers ML @ GHS 60), and Ticket 4 (GHS 10)."
+      "time": "15:40 GMT",
+      "actor": "Gemini 4 Argon (Planner)",
+      "action": "Audit: Lazio vs Cagliari Calcio concluded 1–1 FT (Nzola 21' | Isaksen 36'). T-Minus 35m countdown to Lyon vs Angers (16:15 GMT) and Liverpool vs Arsenal Over 1.5 Goals (16:30 GMT)."
     },
     {
       "time": "14:58 GMT",
