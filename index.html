@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BERMESI // Autonomous Betting Intelligence Terminal</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 20, 30, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-amber: #f59e0b;
+      --accent-green: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-red: #ef4444;
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Space Grotesk', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.04) 0%, transparent 40%);
+    }
+
+    /* Top Bloomberg Ticker Header */
+    .terminal-nav {
+      background: rgba(10, 14, 22, 0.95);
+      border-bottom: 1px solid var(--card-border);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-pulse {
+      width: 9px;
+      height: 9px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.15); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .brand-title {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    .brand-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: var(--accent-amber);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .terminal-clock {
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .clock-item span {
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    .terminal-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .metric-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .metric-card.green::before { background: var(--accent-green); }
+    .metric-card.amber::before { background: var(--accent-amber); }
+    .metric-card.blue::before { background: var(--accent-blue); }
+    .metric-card.purple::before { background: var(--accent-purple); }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: var(--font-sans);
+      color: #fff;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      margin-top: 6px;
+      color: var(--accent-green);
+    }
+
+    /* Charts & Telemetry Grid */
+    .telemetry-row {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .telemetry-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .panel-title {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      color: var(--text-muted);
+    }
+
+    /* Slips Matrix */
+    .tickets-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .ticket-card {
+      background: rgba(10, 14, 22, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .ticket-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .ticket-name {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--accent-amber);
+    }
+
+    .ticket-status {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .status-won { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+    .status-cashout { background: rgba(56, 189, 248, 0.2); color: var(--accent-blue); }
+    .status-loss { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+
+    .ticket-detail {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .ticket-detail b {
+      color: #fff;
+    }
+
+    /* Decision Feed Terminal */
+    .decision-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .decision-entry {
+      background: rgba(10, 14, 22, 0.5);
+      border-left: 2px solid var(--accent-blue);
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      font-size: 11px;
+    }
+
+    .decision-entry.CASHOUT { border-left-color: var(--accent-amber); }
+    .decision-entry.SECURITY { border-left-color: var(--accent-green); }
+    .decision-entry.SYNTHESIS { border-left-color: var(--accent-purple); }
+
+    .decision-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .decision-brain {
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    /* Security Passkey Gate */
+    #securityGate {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 10, 0.96);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gate-box {
+      background: var(--card-bg);
+      border: 1px solid var(--accent-amber);
+      border-radius: 8px;
+      padding: 32px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+    }
+
+    .gate-input {
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 20px;
+      letter-spacing: 6px;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      margin: 18px 0;
+    }
+
+    .gate-btn {
+      background: var(--accent-amber);
+      color: #000;
+      border: none;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Utility */
+    .code-pill {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 10px;
+      color: var(--accent-blue);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bloomberg Navigation Bar -->
+  <header class="terminal-nav">
+    <div class="brand-section">
+      <div class="status-pulse"></div>
+      <div class="brand-title">BERMESI TERMINAL</div>
+      <div class="brand-badge">HERMES V4.2</div>
+      <div class="code-pill">NOUS RESEARCH AUTONOMOUS</div>
+    </div>
+    <div class="terminal-clock">
+      <div class="clock-item">GMT: <span id="clockGmt">--:--:-- GMT</span></div>
+      <div class="clock-item">PHASE: <span id="currentPhase">SYNCING...</span></div>
+      <div class="clock-item">STATUS: <span style="color: var(--accent-green);">100% AUTONOMOUS</span></div>
+    </div>
+  </header>
+
+  <main class="terminal-container">
+    
+    <!-- Top Financial KPI Grid -->
+    <section class="metrics-grid">
+      <div class="metric-card green">
+        <div class="metric-label">Vault Balance <span>SPORTYBET</span></div>
+        <div class="metric-value" id="valVaultBalance">GHS 354.68</div>
+        <div class="metric-sub" id="valNetProfit">+104.68 GHS (+41.87% PnL)</div>
+      </div>
+
+      <div class="metric-card amber">
+        <div class="metric-label">Compounded ARR <span>ANNUALIZED</span></div>
+        <div class="metric-value" id="valArr">+384.2%</div>
+        <div class="metric-sub">Ratchet Compounded Target</div>
+      </div>
+
+      <div class="metric-card blue">
+        <div class="metric-label">Return On Investment <span>ROI</span></div>
+        <div class="metric-value" id="valRoi">+41.87%</div>
+        <div class="metric-sub">Base Injection: GHS 250.00</div>
+      </div>
+
+      <div class="metric-card purple">
+        <div class="metric-label">Cashout Capture Rate <span>DISCIPLINE</span></div>
+        <div class="metric-value" id="valCashoutRate">93.6%</div>
+        <div class="metric-sub">Immutable Trigger: &ge; 92.0%</div>
+      </div>
+
+      <div class="metric-card green">
+        <div class="metric-label">Dynamic Unit <span>1.0U ALLOCATION</span></div>
+        <div class="metric-value" id="valUnit">GHS 20.00</div>
+        <div class="metric-sub">Reserve: GHS 154.68 Liquid</div>
+      </div>
+    </section>
+
+    <!-- Main Visuals & Bloomberg Charts -->
+    <section class="telemetry-row">
+      <!-- Equity Growth Curve -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0V0zm10 5l-4 4-3-3L1 8.5 2 9.5l2-1.5 3 3 5-5 2.5 2.5L16 7l-6-2z"/></svg>
+            Bankroll Compounding Equity Curve (GHS)
+          </div>
+          <div class="panel-tag">LIVE TELEMETRY</div>
+        </div>
+        <div style="height: 260px;">
+          <canvas id="equityChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Heuristic Weights & Nous Hermes Engine -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7V7h2v5zm0-6H7V4h2v2z"/></svg>
+            Learned Heuristic Matrix
+          </div>
+          <div class="panel-tag">NOUS HERMES CORE</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;" id="heuristicsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4-Tier Blueprint Matrix -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11z"/></svg>
+          Hermes 4-Tier Portfolio Execution Slips
+        </div>
+        <div class="panel-tag">NON-CORRELATED ALLOCATION (10.0U)</div>
+      </div>
+      <div class="tickets-matrix" id="ticketsContainer">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Real-Time Decision Feed & Self-Authored Tool Registry -->
+    <section class="telemetry-row">
+      <!-- Live Bloomberg Decision Feed -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7 4h2v5H7V4zm1 7a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+            Agent Autonomous Decision Feed
+          </div>
+          <div class="panel-tag">REAL-TIME SENTINEL</div>
+        </div>
+        <div class="decision-feed" id="decisionFeedContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Self-Authored Dynamic Tools -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 0v16l4-4h10V0H1zm13 11H4.59L3 12.59V1h11v10z"/></svg>
+            Nous Hermes Tool Factory
+          </div>
+          <div class="panel-tag">SELF-SYNTHESIZED</div>
+        </div>
+        <div id="dynamicToolsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Live GMT Clock
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getUTCHours()).padStart(2, '0');
+      const m = String(now.getUTCMinutes()).padStart(2, '0');
+      const s = String(now.getUTCSeconds()).padStart(2, '0');
+      document.getElementById('clockGmt').textContent = `${h}:${m}:${s} GMT`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    let chartInstance = null;
+
+    // Fetch and Render Telemetry Data
+    async function loadTelemetry() {
+      try {
+        const res = await fetch('data/telemetry.json?t=' + Date.now());
+        if (!res.ok) throw new Error('Telemetry unavailable');
+        const data = await res.json();
+        renderDashboard(data);
+      } catch (err) {
+        console.warn('Using cached telemetry fallback:', err.message);
+      }
+    }
+
+    function renderDashboard(data) {
+      // Financial KPIs
+      document.getElementById('valVaultBalance').textContent = `GHS ${data.financials.currentVaultBalance.toFixed(2)}`;
+      document.getElementById('valNetProfit').textContent = `+${data.financials.netProfit.toFixed(2)} GHS (+${data.financials.roiPercent}% PnL)`;
+      document.getElementById('valArr').textContent = `+${data.financials.projectedArrPercent}%`;
+      document.getElementById('valRoi').textContent = `+${data.financials.roiPercent}%`;
+      document.getElementById('valCashoutRate').textContent = `${data.financials.avgCashoutEquityCapturedPercent}%`;
+      document.getElementById('valUnit').textContent = `GHS ${data.financials.baseUnit.toFixed(2)}`;
+      document.getElementById('currentPhase').textContent = data.schedule.activePhase;
+
+      // Render Equity Chart
+      renderChart(data.equityHistory);
+
+      // Render Heuristics
+      const hCont = document.getElementById('heuristicsContainer');
+      hCont.innerHTML = '';
+      const weights = data.learningIntelligence.activeHeuristicWeights;
+      const weightLabels = [
+        { label: 'NBA Spread Cap (Single)', val: `${weights.maxNbaSpreadSingle} pts`, desc: 'Lesson 1: Garbage-Time Cap' },
+        { label: 'Mandatory Cashout Threshold', val: `${(weights.cashoutTriggerRatio * 100).toFixed(0)}% True Equity`, desc: 'Lesson 2: Dynamic Realization' },
+        { label: 'Back-to-Back Rest Disadvantage', val: `-${(weights.roadBackToBackPenalty * 100).toFixed(0)}% Penalty`, desc: 'Lesson 4: Fatigued Frontcourt' },
+        { label: 'Low-Block Derby BTTS Filter', val: 'DISINCENTIVE', desc: 'Lesson 5: 5-at-the-back caution' }
+      ];
+
+      weightLabels.forEach(w => {
+        const el = document.createElement('div');
+        el.className = 'ticket-detail';
+        el.style.padding = '8px';
+        el.style.background = 'rgba(255, 255, 255, 0.02)';
+        el.style.borderRadius = '4px';
+        el.innerHTML = `
+          <div>
+            <div style="color: #fff; font-weight: 700;">${w.label}</div>
+            <div style="font-size: 10px; color: var(--text-muted);">${w.desc}</div>
+          </div>
+          <div style="font-weight: 800; color: var(--accent-amber);">${w.val}</div>
+        `;
+        hCont.appendChild(el);
+      });
+
+      // Render Tickets
+      const tCont = document.getElementById('ticketsContainer');
+      tCont.innerHTML = '';
+      data.portfolio.forEach(t => {
+        const statusClass = t.status.includes('WON') ? 'status-won' : (t.status.includes('CASHED') ? 'status-cashout' : 'status-loss');
+        const card = document.createElement('div');
+        card.className = 'ticket-card';
+        card.innerHTML = `
+          <div class="ticket-card-header">
+            <span class="ticket-name">${t.tier}: ${t.name}</span>
+            <span class="ticket-status ${statusClass}">${t.status}</span>
+          </div>
+          <div class="ticket-detail">Allocation: <b>${t.allocation}</b></div>
+          <div class="ticket-detail">Structure: <b>${t.structure}</b></div>
+          <div class="ticket-detail">PnL Result: <b style="color: ${t.pnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">${t.pnl >= 0 ? '+' : ''}${t.pnl.toFixed(2)} GHS</b></div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 6px;">${t.objective}</div>
+        `;
+        tCont.appendChild(card);
+      });
+
+      // Render Decisions
+      const dCont = document.getElementById('decisionFeedContainer');
+      dCont.innerHTML = '';
+      data.recentDecisions.forEach(d => {
+        const entry = document.createElement('div');
+        entry.className = `decision-entry ${d.type}`;
+        entry.innerHTML = `
+          <div class="decision-top">
+            <span class="decision-brain">[${d.brain}]</span>
+            <span>${d.time}</span>
+          </div>
+          <div style="color: #fff;">${d.summary}</div>
+        `;
+        dCont.appendChild(entry);
+      });
+
+      // Render Tools
+      const dtCont = document.getElementById('dynamicToolsContainer');
+      dtCont.innerHTML = '';
+      data.learningIntelligence.synthesizedTools.forEach(tool => {
+        const row = document.createElement('div');
+        row.style.padding = '10px';
+        row.style.background = 'rgba(168, 85, 247, 0.08)';
+        row.style.border = '1px solid rgba(168, 85, 247, 0.25)';
+        row.style.borderRadius = '4px';
+        row.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <b style="color: var(--accent-purple);">${tool.name}</b>
+            <span class="code-pill">${tool.status}</span>
+          </div>
+          <div style="font-size: 10px; color: var(--text-muted);">${tool.description}</div>
+        `;
+        dtCont.appendChild(row);
+      });
+    }
+
+    function renderChart(history) {
+      const ctx = document.getElementById('equityChart').getContext('2d');
+      if (chartInstance) chartInstance.destroy();
+
+      const labels = history.map(h => h.date);
+      const points = history.map(h => h.balance);
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Bankroll (GHS)',
+            data: points,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.35,
+            pointBackgroundColor: '#10b981',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
+            }
+          }
+        }
+      });
+    }
+
+    loadTelemetry();
+    // Auto-refresh every 30 seconds with ZERO tokens consumed
+    setInterval(loadTelemetry, 30000);
+  </script>
+</body>
+</html>

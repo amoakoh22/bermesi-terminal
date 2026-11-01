@@ -1,0 +1,143 @@
+{
+  "system": {
+    "agentName": "Bermesi",
+    "coreEngine": "Hermes Autonomous Betting Engine 4.2",
+    "cognitiveHarness": "Nous Research Hermes + Google Antigravity (agy)",
+    "status": "OPERATIONAL_AUTONOMOUS",
+    "host": "Windows Dedicated Host (24/7 Always-On)",
+    "lastSyncGMT": "03:25 GMT",
+    "dualBrain": {
+      "planner": "Gemini 4 Argon (Medium)",
+      "execution": "Gemini 3.8 Flash (Medium)"
+    }
+  },
+  "financials": {
+    "currency": "GHS",
+    "initialCapitalInjected": 250,
+    "currentVaultBalance": 354.68,
+    "netProfit": 104.68,
+    "roiPercent": 41.87,
+    "projectedArrPercent": 384.2,
+    "winRatePercent": 78.6,
+    "avgCashoutEquityCapturedPercent": 93.6,
+    "baseUnit": 20,
+    "dailyDeploymentStake": 200,
+    "liquidVaultReserve": 154.68,
+    "ratchetPhase": "Base Phase (20.00u)"
+  },
+  "schedule": {
+    "currentTimeGMT": "03:25 GMT",
+    "activePhase": "REST_OR_OVERNIGHT_MONITORING",
+    "nextMilestone": "08:00 GMT - Morning Post-Mortem & Vault Ledger Sync",
+    "isCashoutWindowActive": false
+  },
+  "portfolio": [
+    {
+      "tier": "Ticket 1 (Plan A)",
+      "name": "The Vault Grinder",
+      "allocation": "5u (GHS 100)",
+      "structure": "2-Leg Anchor Multiple",
+      "odds": "1.55 - 1.80",
+      "status": "SETTLED_WON",
+      "pnl": 65,
+      "objective": "Capital Defense & Base Growth (Recovers 80-90% daily slate)"
+    },
+    {
+      "tier": "Ticket 2 (Plan B)",
+      "name": "Sharp Singles Matrix",
+      "allocation": "3u (GHS 60)",
+      "structure": "3 Independent Singles (1.0u each: 2A, 2B, 2C)",
+      "odds": "1.55 - 1.90",
+      "status": "SETTLED_PROFITABLE",
+      "pnl": 21.6,
+      "objective": "Linear Alpha Generation without correlation risk"
+    },
+    {
+      "tier": "Ticket 3 (Plan C)",
+      "name": "Cross-Sport Multiplier",
+      "allocation": "1.5u (GHS 30)",
+      "structure": "3-Leg Cross-Sport Multiple (2 Early Football + 1 Late NBA)",
+      "odds": "Dynamic",
+      "status": "CASHED_OUT_LOCK",
+      "pnl": 27.39,
+      "cashoutRatio": 93.6,
+      "objective": "Equity Compounding & Pre-NBA Cashout (> 2.00x settled equity)"
+    },
+    {
+      "tier": "Ticket 4 (Plan D)",
+      "name": "Chronological Arbitrage",
+      "allocation": "0.5u (GHS 10)",
+      "structure": "3-Leg Staggered Time Multiple (Early + Mid + Late)",
+      "odds": "Leverage",
+      "status": "SETTLED_LOSS",
+      "pnl": -10,
+      "objective": "Low-Risk Leverage & Free In-Play Options"
+    }
+  ],
+  "learningIntelligence": {
+    "activeHeuristicWeights": {
+      "maxNbaSpreadSingle": -9.5,
+      "cashoutTriggerRatio": 0.92,
+      "roadBackToBackPenalty": 0.15,
+      "homeAdvantageMultiplier": 1.1,
+      "lowBlockBTTSDisincentive": 0.85
+    },
+    "synthesizedTools": [
+      {
+        "name": "OddsRatioCalculator",
+        "description": "Calculates positive EV margin between SportyBet and fair implied probabilities",
+        "status": "ACTIVE_HOT_LOADED"
+      }
+    ],
+    "experienceCount": 15,
+    "lastCalibrationEvent": "Auto-calibrated spread cap and cashout floor via Nous Hermes experience replay."
+  },
+  "recentDecisions": [
+    {
+      "time": "03:25 GMT",
+      "type": "SECURITY",
+      "brain": "Windows DPAPI",
+      "summary": "Vault operational & bound to workstation TPM. 100% security verified."
+    },
+    {
+      "time": "21:30 GMT",
+      "type": "CASHOUT",
+      "brain": "Gemini 3.8 Flash (Execution)",
+      "summary": "Mandatory Cashout Lock: Captured 93.6% true mathematical equity before midnight NBA tip-off."
+    },
+    {
+      "time": "11:00 GMT",
+      "type": "TACTICAL_GATE",
+      "brain": "Gemini 4 Argon (Planner)",
+      "summary": "T-Minus 45m starting lineup gate confirmed. Zero parlay-single overlap enforced."
+    },
+    {
+      "time": "03:16 GMT",
+      "type": "SYNTHESIS",
+      "brain": "Nous Hermes Tool Factory",
+      "summary": "Self-authored and registered new dynamic tool: OddsRatioCalculator."
+    }
+  ],
+  "equityHistory": [
+    {
+      "date": "Oct 25",
+      "balance": 250
+    },
+    {
+      "date": "Oct 27",
+      "balance": 272.5
+    },
+    {
+      "date": "Oct 29",
+      "balance": 298.1
+    },
+    {
+      "date": "Oct 30",
+      "balance": 315.4
+    },
+    {
+      "date": "Oct 31",
+      "balance": 354.68
+    }
+  ]
+}
