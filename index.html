@@ -2,1002 +2,1012 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BERMESI // Autonomous Betting Intelligence Terminal</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BERMESI // Bloomberg-Grade KPI Terminal</title>
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(15, 20, 30, 0.85);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent-amber: #f59e0b;
-      --accent-green: #10b981;
-      --accent-blue: #38bdf8;
-      --accent-purple: #a855f7;
-      --accent-red: #ef4444;
-      --text-main: #f3f4f6;
-      --text-muted: #94a3b8;
-      --font-mono: 'JetBrains Mono', monospace;
-      --font-sans: 'Space Grotesk', sans-serif;
+      --bg: #090d16;
+      --card-bg: #111827;
+      --card-inner: #0d131f;
+      --border: #1f293d;
+      --border-bright: #374151;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --green: #10b981;
+      --green-glow: rgba(16, 185, 129, 0.15);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.15);
+      --blue: #38bdf8;
+      --purple: #a855f7;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-mono);
-      font-size: 13px;
-      line-height: 1.5;
-      overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.04) 0%, transparent 40%);
-      padding-bottom: 70px;
-    }
-
-    /* Top Bloomberg Ticker Navigation */
-    .terminal-nav {
-      background: rgba(10, 14, 22, 0.95);
-      border-bottom: 1px solid var(--card-border);
-      padding: 10px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .status-pulse {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-green);
-      animation: pulse 2s infinite;
-      flex-shrink: 0;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.15); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .brand-title {
+      background-color: var(--bg);
+      color: var(--text);
       font-family: var(--font-sans);
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: #fff;
-      white-space: nowrap;
-    }
-
-    .brand-badge {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      color: var(--accent-amber);
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .code-pill {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 10px;
-      color: var(--accent-blue);
-      white-space: nowrap;
-    }
-
-    .terminal-clock {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 11px;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-    }
-
-    .clock-item span {
-      color: var(--accent-blue);
-      font-weight: 700;
-    }
-
-    /* Mobile specific adjustments for top bar */
-    @media (max-width: 768px) {
-      .terminal-nav {
-        padding: 6px 10px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 4px;
-      }
-      .brand-section {
-        justify-content: space-between;
-        width: 100%;
-      }
-      .brand-title {
-        font-size: 13px;
-        letter-spacing: 0.2px;
-      }
-      .brand-badge {
-        font-size: 9px;
-        padding: 1px 5px;
-      }
-      .code-pill {
-        display: none;
-      }
-      .terminal-clock {
-        font-size: 9px;
-        gap: 6px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        background: rgba(0, 0, 0, 0.4);
-        padding: 4px 8px;
-        border-radius: 4px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      .clock-item {
-        white-space: nowrap;
-      }
-    }
-
-    /* Main Container */
-    .terminal-container {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    @media (min-width: 769px) {
-      .terminal-container {
-        padding: 24px;
-        gap: 24px;
-      }
-    }
-
-    /* Metrics Grid */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    @media (min-width: 640px) {
-      .metrics-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-      }
-    }
-
-    .metric-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 14px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-    }
-
-    .metric-card.green::before { background: var(--accent-green); }
-    .metric-card.amber::before { background: var(--accent-amber); }
-    .metric-card.blue::before { background: var(--accent-blue); }
-    .metric-card.purple::before { background: var(--accent-purple); }
-
-    .metric-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .metric-value {
-      font-size: clamp(18px, 4vw, 24px);
-      font-weight: 800;
-      font-family: var(--font-sans);
-      color: #fff;
-    }
-
-    .metric-sub {
-      font-size: 10px;
-      margin-top: 4px;
-      color: var(--accent-green);
-      word-break: break-word;
-    }
-
-    /* Panels & Telemetry Rows */
-    .telemetry-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    @media (min-width: 1024px) {
-      .telemetry-row {
-        grid-template-columns: 2fr 1.2fr;
-        gap: 20px;
-      }
-    }
-
-    .panel {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 16px;
-      backdrop-filter: blur(8px);
-    }
-
-    @media (min-width: 769px) {
-      .panel {
-        padding: 20px;
-      }
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .panel-title {
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .panel-tag {
-      font-size: 9px;
-      padding: 2px 6px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 3px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    /* Slips Matrix */
-    .tickets-matrix {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 640px) {
-      .tickets-matrix {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      }
-    }
-
-    .ticket-card {
-      background: rgba(10, 14, 22, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 6px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .ticket-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-
-    .ticket-name {
-      font-weight: 700;
-      font-size: 12px;
-      color: var(--accent-amber);
-    }
-
-    .ticket-status {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 3px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .status-won { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
-    .status-pending { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
-    .status-armed { background: rgba(56, 189, 248, 0.2); color: var(--accent-blue); }
-    .status-cashout { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
-
-    .ticket-detail {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .ticket-detail b {
-      color: #fff;
-    }
-
-    /* Decision Feed Terminal */
-    .decision-feed {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 340px;
-      overflow-y: auto;
-    }
-
-    .decision-entry {
-      background: rgba(10, 14, 22, 0.5);
-      border-left: 2px solid var(--accent-blue);
-      padding: 8px 12px;
-      border-radius: 0 4px 4px 0;
-      font-size: 11px;
-    }
-
-    .decision-entry.AUDIT_VERIFIED { border-left-color: var(--accent-green); }
-    .decision-entry.MORNING_AUDIT { border-left-color: var(--accent-amber); }
-    .decision-entry.LIVE_IN_PLAY_ORDER { border-left-color: var(--accent-purple); }
-    .decision-entry.CASHOUT { border-left-color: var(--accent-amber); }
-
-    .decision-top {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-muted);
-      font-size: 9px;
-      margin-bottom: 2px;
-    }
-
-    .decision-brain {
-      color: var(--accent-blue);
-      font-weight: 700;
-    }
-
-    /* Interactive Floating Chat / Prompt Terminal */
-    .chat-drawer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 14, 22, 0.98);
-      border-top: 1px solid rgba(245, 158, 11, 0.4);
-      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
-      z-index: 900;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      max-height: 85vh;
-    }
-
-    .chat-drawer.collapsed {
-      transform: translateY(calc(100% - 46px));
-    }
-
-    .chat-header {
-      height: 46px;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      user-select: none;
-      background: rgba(15, 20, 30, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .chat-header-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 13px;
-      color: #fff;
-    }
-
-    .chat-toggle-icon {
-      font-size: 16px;
-      color: var(--accent-amber);
-      transition: transform 0.2s;
-    }
-
-    .chat-drawer:not(.collapsed) .chat-toggle-icon {
-      transform: rotate(180deg);
-    }
-
-    .chat-body {
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-      max-height: 380px;
-      min-height: 200px;
-    }
-
-    .chat-msg {
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 11px;
+      padding: 18px;
       line-height: 1.4;
-      max-width: 88%;
-      word-break: break-word;
+      -webkit-font-smoothing: antialiased;
     }
+    .container { max-width: 1240px; margin: 0 auto; }
+    .text-green { color: var(--green); }
+    .text-amber { color: var(--amber); }
+    .text-red { color: #ef4444; }
+    .badge-red { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35); }
+    .perf-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 11.5px; }
+    .perf-table th { text-align: left; padding: 8px 10px; color: var(--text-muted); border-bottom: 1px solid var(--border-bright); font-size: 10.5px; text-transform: uppercase; }
+    .perf-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .perf-table tr:last-child td { border-bottom: none; }
 
-    .chat-msg.agent {
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      color: #e0f2fe;
-      align-self: flex-start;
-    }
-
-    .chat-msg.user {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      color: #fef3c7;
-      align-self: flex-end;
-    }
-
-    .chat-quick-actions {
+    /* Header */
+    .header {
       display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+      gap: 12px;
     }
-
-    .chat-quick-actions::-webkit-scrollbar {
-      display: none;
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .pulse-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: pulse 2s infinite;
     }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+    .title { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    .tag {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+      background: var(--green-glow); color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px;
+    }
+    .meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); text-align: right; }
 
-    .quick-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted);
+    .ctrl-btn {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
       padding: 4px 10px;
-      border-radius: 14px;
-      font-size: 10px;
-      white-space: nowrap;
-      cursor: pointer;
+      border-radius: 5px;
       font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
       transition: all 0.2s;
     }
+    .ctrl-btn:hover { background: #334155; color: #fff; }
+    .ctrl-btn.active { background: rgba(16, 185, 129, 0.2); color: var(--green); border-color: var(--green); }
 
-    .quick-pill:hover, .quick-pill:active {
-      background: rgba(245, 158, 11, 0.2);
-      border-color: var(--accent-amber);
-      color: #fff;
+    /* Financial KPIs */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
     }
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .kpi-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+    .kpi-value { font-family: var(--font-mono); font-size: 26px; font-weight: 800; margin: 6px 0 2px; }
+    .kpi-sub { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
 
-    .chat-input-bar {
-      padding: 8px 12px;
+    /* Matrix Summary */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .matrix-item {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: var(--font-mono);
+    }
+    .matrix-label { font-size: 11px; color: var(--text-muted); }
+    .matrix-value { font-size: 18px; font-weight: 800; margin-top: 4px; }
+
+    /* Analytics Charts Grid */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .chart-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .chart-head {
       display: flex;
-      gap: 8px;
-      background: rgba(8, 10, 16, 0.95);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
     }
+    .chart-title { font-size: 13px; font-weight: 700; font-family: var(--font-mono); text-transform: uppercase; }
 
-    .chat-input {
-      flex: 1;
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Slips Grid */
+    .section-title {
+      font-size: 16px; font-weight: 700; margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .slips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .slip-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .slip-card.highlight { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 0 16px var(--green-glow); }
+    .slip-card.blue-glow { border-color: rgba(56, 189, 248, 0.45); box-shadow: 0 0 14px rgba(56, 189, 248, 0.12); }
+    .slip-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .slip-name { font-family: var(--font-mono); font-size: 13px; font-weight: 700; }
+    .badge {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      padding: 3px 7px; border-radius: 4px; text-transform: uppercase;
+    }
+    .badge-green { background: var(--green-glow); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-amber { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-purple { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    .slip-legs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .leg-row {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
       border-radius: 6px;
-      color: #fff;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+    }
+    .leg-match { font-weight: 700; color: var(--text); font-size: 12.5px; }
+    .leg-path { color: var(--blue); font-family: var(--font-mono); font-size: 10.5px; margin-top: 3px; }
+    .leg-pick { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+    .leg-score { font-family: var(--font-mono); font-weight: 700; text-align: right; white-space: nowrap; font-size: 11.5px; }
+
+    .commentary-box {
+      background: #0b0f19;
+      border-left: 3px solid var(--blue);
+      padding: 8px 10px;
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #94a3b8;
+      border-radius: 0 4px 4px 0;
+    }
+    .commentary-item { margin-bottom: 3px; }
+    .commentary-item:last-child { margin-bottom: 0; }
+
+    .slip-foot {
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-family: var(--font-mono);
       font-size: 12px;
-      padding: 8px 12px;
-      outline: none;
+      margin-top: 10px;
     }
-
-    .chat-input:focus {
-      border-color: var(--accent-amber);
-    }
-
-    .chat-send-btn {
-      background: var(--accent-amber);
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      font-family: var(--font-sans);
+    .cashout-pill {
+      background: var(--green-glow);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 3px 8px;
+      border-radius: 4px;
       font-weight: 700;
-      font-size: 12px;
-      padding: 0 16px;
-      cursor: pointer;
     }
+    .footer { text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 20px; }
   </style>
 </head>
 <body>
+  <div class="container">
 
-  <!-- Top Bloomberg Navigation Bar -->
-  <header class="terminal-nav">
-    <div class="brand-section">
-      <div class="status-pulse"></div>
-      <div class="brand-title">BERMESI TERMINAL</div>
-      <div class="brand-badge">HERMES V4.2</div>
-      <div class="code-pill">NOUS RESEARCH AUTONOMOUS</div>
-    </div>
-    <div class="terminal-clock">
-      <div class="clock-item">GMT: <span id="clockGmt">--:--:-- GMT</span></div>
-      <div class="clock-item">PHASE: <span id="currentPhase">SYNCING...</span></div>
-      <div class="clock-item">STATUS: <span style="color: var(--accent-green);">100% AUTONOMOUS</span></div>
-    </div>
-  </header>
+    <header class="header">
+      <div class="brand">
+        <div class="pulse-dot"></div>
+        <div>
+          <div class="title">BERMESI EXECUTIVE TERMINAL // HERMES v4.5</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Persistent SQLite Ledger • 12 Hardened Heuristics • Zero SportyBet Scraping</div>
+        </div>
+      </div>
+      <div class="meta" style="display:flex; align-items:center; gap:12px;">
+        <div>
+          <div>DATABASE: <b style="color:var(--blue);">bermesi_ledger.sqlite</b></div>
+          <div style="color:var(--text-muted);">LAST SYNC: <b style="color:#fff;" id="syncTime">21:11 GMT (Nov 11-12 Micro-Compound Blueprint)</b></div>
+        </div>
+        <div>
+          <button class="ctrl-btn active" id="refreshToggle" onclick="toggleAutoRefresh()">Auto-Refresh: ON (60s)</button>
+        </div>
+      </div>
+    </header>
 
-  <main class="terminal-container">
+    <!-- Top KPIs -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Current Liquid Reserve</div>
+        <div class="kpi-value text-green">GHS 7.91</div>
+        <div class="kpi-sub" style="color: var(--green);">Untouched Cash Buffer • Capital Preservation Active</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Active Staked In-Flight</div>
+        <div class="kpi-value text-amber">GHS 25.00</div>
+        <div class="kpi-sub">10.0u Micro-Allocation (1.0u = GHS 2.50) Across 4 Tiers</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Sandbox Equity</div>
+        <div class="kpi-value" style="color: var(--blue);">GHS 32.91</div>
+        <div class="kpi-sub">100% Capital Governed by Quantitative Heuristics</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">All-Time Winnings Paid</div>
+        <div class="kpi-value" style="color: var(--purple);">GHS 1642.71</div>
+        <div class="kpi-sub">33 SportyBet Settlements Verified in SQLite Ledger</div>
+      </div>
+    </section>
+
+    <!-- HEURISTIC #12 CAPITAL PROTOCOL BANNER -->
+    <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 12px 16px; margin-bottom: 22px; font-size: 12.5px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <b style="color: var(--green);">🛡️ CAPITAL PRESERVATION PROTOCOL ACTIVE:</b> Operating 100% off existing sandbox capital (<b style="color:#fff;">GHS 32.91</b>). Micro-Unit standard locked (<b style="color:#fff;">1.0u = GHS 2.50</b>). Total active deployment: <b style="color:var(--amber);">GHS 25.00 (10.0u)</b> with a protected <b style="color:var(--green);">GHS 7.91 liquid reserve buffer</b>. Zero chasing. Zero over-leverage.
+      </div>
+    </div>
+
+    <!-- TODAY'S 4-TICKET EXECUTION BOARD (NOV 11-12, 2026) -->
+    <div class="section-title">
+      <span>🎯 Active 4-Tier Execution Board // Nov 11–12, 2026 (Micro-Unit: 1.0u = GHS 2.50)</span>
+      <span class="tag" style="background:var(--green-glow); color:var(--green); border-color:rgba(16,185,129,0.35);">IN-PLAY RADAR ACTIVE • 11 INDEPENDENT FIXTURES</span>
+    </div>
+
+    <section class="slips-grid">
+
+      <!-- Ticket 1: Plan A (The Fortress Vault Grinder) -->
+      <div class="slip-card highlight">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name text-green">TICKET 1 (PLAN A): THE FORTRESS VAULT GRINDER</span>
+            <span class="badge badge-green">⚡ PENDING EXECUTION • COMB: 1.605</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">San Antonio Spurs at Chicago Bulls (01:00 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Main ➔ 1X2 (incl. OT): Spurs @ 1.36</div>
+                <div class="leg-pick text-green">Spurs interior defense advantage (Wembanyama) vs Bulls slow transition drop.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">01:00 GMT<br><span style="font-size:10px;">@ 1.36</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Croatia at England (Nov 12 19:45 GMT)</div>
+                <div class="leg-path">Football ➔ UEFA Nations League ➔ Main ➔ Double Chance: 1X @ 1.18</div>
+                <div class="leg-pick text-green">Wembley home fortress non-loss cushion; deep midfield possession control.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">19:45 GMT<br><span style="font-size:10px;">@ 1.18</span></div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item">🔒 VAULT PROTOCOL: Zero combo traps. 2 independent anchor legs strictly capped at odds 1.605.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Stake: <b>GHS 12.50 (5.0u)</b></span>
+          <span class="cashout-pill" style="color:var(--green); border-color:rgba(16,185,129,0.3);">EST. RETURN: GHS 20.06</span>
+        </div>
+      </div>
+
+      <!-- Ticket 2: Plan B (Sharp Singles Matrix - 3 Separate Slips) -->
+      <div class="slip-card blue-glow">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name" style="color: var(--blue);">TICKET 2 (PLAN B): SHARP SINGLES MATRIX (3 SLIPS)</span>
+            <span class="badge badge-blue">⚡ 3 INDEPENDENT SINGLES @ 1.0u</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2A: OKC Thunder at Portland Trail Blazers (03:00 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Handicap -6.5: Thunder -6.5 @ 1.65</div>
+                <div class="leg-pick text-green">Elite #1 turnover defense vs mistake-prone young Blazers backcourt (Cap $\le -9.5$).</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">03:00 GMT<br><span style="font-size:10px;">@ 1.65</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2B: Cyprus at Armenia (Nov 12 17:00 GMT)</div>
+                <div class="leg-path">Football ➔ UEFA Nations League ➔ Main ➔ 1X2: Armenia Home @ 1.68</div>
+                <div class="leg-pick text-green">Armenia high altitude home pitch advantage; Cyprus lost 7 of last 8 away ties.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">17:00 GMT<br><span style="font-size:10px;">@ 1.68</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2C: Denver Nuggets at Memphis Grizzlies (01:00 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Main ➔ 1X2 (incl. OT): Nuggets @ 1.58</div>
+                <div class="leg-pick text-green">Jokic half-court offensive orchestration vs depleted Grizzlies interior paint.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">01:00 GMT<br><span style="font-size:10px;">@ 1.58</span></div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item">🎯 SINGLES VALUE INSULATION: 3 completely isolated single tickets at GHS 2.50 each.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Total Staked: <b>GHS 7.50 (3.0u)</b></span>
+          <span class="cashout-pill" style="color:var(--blue); border-color:rgba(56,189,248,0.3);">EST. RETURN: GHS 12.28</span>
+        </div>
+      </div>
+
+      <!-- Ticket 3: Plan C (Cross-Sport Multiplier) -->
+      <div class="slip-card">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name text-amber">TICKET 3 (PLAN C): CROSS-SPORT MULTIPLIER</span>
+            <span class="badge badge-amber">⚡ PRE-NBA CASHOUT LOCK • COMB: 1.813</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Belgium at Türkiye (Nov 12 17:00 GMT)</div>
+                <div class="leg-path">Football ➔ UEFA Nations League ➔ Goals ➔ Over/Under: Over 1.5 Goals @ 1.24</div>
+                <div class="leg-pick text-green">Fast transition pace; both squads top 5 in expected box entries.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">17:00 GMT<br><span style="font-size:10px;">@ 1.24</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Spain at Czechia (Nov 12 19:45 GMT)</div>
+                <div class="leg-path">Football ➔ UEFA Nations League ➔ Main ➔ Double Chance: X2 (Spain/Draw) @ 1.16</div>
+                <div class="leg-pick text-green">European Champions 68%+ ball possession control suffocates underdog counters.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">19:45 GMT<br><span style="font-size:10px;">@ 1.16</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Boston Celtics at Toronto Raptors (00:00 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Main ➔ 1X2 (incl. OT): Celtics @ 1.26</div>
+                <div class="leg-pick text-green">Celtics 3PT volume advantage vs rebuilding Raptors perimeter defense.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">00:00 GMT<br><span style="font-size:10px;">@ 1.26</span></div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item">⚡ HEURISTIC #2 LOCK: Mandatory cashout triggered at $\ge 92\%$ equity before midnight NBA tip-off.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Stake: <b>GHS 3.75 (1.5u)</b></span>
+          <span class="cashout-pill" style="color:var(--amber); border-color:rgba(245,158,11,0.3);">EST. RETURN: GHS 6.80</span>
+        </div>
+      </div>
+
+      <!-- Ticket 4: Plan D (Chronological Arbitrage Lock) -->
+      <div class="slip-card">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name" style="color:var(--purple);">TICKET 4 (PLAN D): CHRONOLOGICAL ARBITRAGE</span>
+            <span class="badge badge-purple">⚡ 3 STAGGERED WINDOWS • COMB: 2.016</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Window 1: Cleveland Cavaliers at NY Knicks (00:00 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Totals ➔ Under 228.5 Points @ 1.28</div>
+                <div class="leg-pick text-green">Elite half-court defense duel; slow possessions (Projected Pace 97.4).</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">00:00 GMT<br><span style="font-size:10px;">@ 1.28</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Window 2: Golden State Warriors at Houston Rockets (02:30 GMT)</div>
+                <div class="leg-path">Basketball ➔ USA ➔ NBA ➔ Totals ➔ Over 215.5 Points @ 1.25</div>
+                <div class="leg-pick text-green">Fast break track meet; high shot frequency and perimeter cadence.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">02:30 GMT<br><span style="font-size:10px;">@ 1.25</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Window 3: France at Italy (Nov 12 19:45 GMT)</div>
+                <div class="leg-path">Football ➔ UEFA Nations League ➔ Goals ➔ Under 3.5 Goals @ 1.26</div>
+                <div class="leg-pick text-green">Tight tactical clash between top European defensive midfields.</div>
+              </div>
+              <div class="leg-score" style="color:var(--blue);">19:45 GMT<br><span style="font-size:10px;">@ 1.26</span></div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item">📈 FREE EQUITY LOCK: Staggered kickoffs allow dynamic hedge protection at each stage.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Stake: <b>GHS 1.25 (0.5u)</b></span>
+          <span class="cashout-pill" style="color:var(--purple); border-color:rgba(168,85,247,0.3);">EST. RETURN: GHS 2.52</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- THURSDAY NOV 5 POST-MORTEM SLIP AUDIT -->
+    <div class="section-title">
+      <span>📋 Settled Slate Post-Mortem Audit &amp; Root-Cause CLV Review (Nov 5)</span>
+      <span class="tag" style="background:rgba(239,68,68,0.15); color:#ef4444; border-color:rgba(239,68,68,0.3);">SETTLED: -GHS 170.80 (-8.54u)</span>
+    </div>
+
+    <section class="slips-grid">
+
+      <!-- Settled Ticket 1: Plan A -->
+      <div class="slip-card">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name text-red">SETTLED TICKET 1 (PLAN A): THE VAULT GRINDER</span>
+            <span class="badge badge-red">❌ LOST • GHS 0.00</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">SL Benfica vs KKS Lech Poznań (3–1 FT)</div>
+                <div class="leg-pick text-green">✓ HIT: Benfica dominant 3-1 victory.</div>
+              </div>
+              <div class="leg-score text-green">WON</div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">FC Copenhagen vs FC Iberia 1999 (2–1 FT)</div>
+                <div class="leg-pick text-green">✓ HIT: Copenhagen controlled at Parken.</div>
+              </div>
+              <div class="leg-score text-green">WON</div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Bayer Leverkusen vs Marseille (0–1 FT)</div>
+                <div class="leg-pick text-red">✗ MISSED: Marseille 77' goal sole score. Missed Over 1.5 by 1 goal.</div>
+              </div>
+              <div class="leg-score text-red">LOST</div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item" style="color:#ef4444;">🚨 ROOT CAUSE: Combo trap & 3-leg bloat violation. Model Error codified: Fortress Grinder strictly capped at 2 pure legs.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Stake: GHS 100.00 (5.0u)</span>
+          <span class="cashout-pill" style="color:#ef4444; border-color:rgba(239,68,68,0.3);">NET: -GHS 100.00</span>
+        </div>
+      </div>
+
+      <!-- Settled Ticket 2: Plan B -->
+      <div class="slip-card blue-glow">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name" style="color: var(--blue);">SETTLED TICKET 2 (PLAN B): SHARP SINGLES</span>
+            <span class="badge badge-green">🟢 1/3 HIT • +GHS 29.20 PAID</span>
+          </div>
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2A: Palace vs Hoffenheim (1–1 FT)</div>
+                <div class="leg-pick text-red">✗ MISSED: Over 2.5 missed by 1 goal.</div>
+              </div>
+              <div class="leg-score text-red">LOST</div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2B: AS Monaco vs Nordsjælland (2–0 FT)</div>
+                <div class="leg-pick text-green">✓ HIT: Monaco clinical 2-0 win. Paid GHS 29.20.</div>
+              </div>
+              <div class="leg-score text-green">+GHS 29.20</div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">Single 2C: KuPS vs KAA Gent (0–0 FT)</div>
+                <div class="leg-pick text-red">✗ MISSED: Low-block scoreless stalemate in Finland.</div>
+              </div>
+              <div class="leg-score text-red">LOST</div>
+            </div>
+          </div>
+          <div class="commentary-box">
+            <div class="commentary-item">🎯 CAPITAL INSULATION: Monaco win preserved GHS 29.20 in liquid wallet.</div>
+          </div>
+        </div>
+        <div class="slip-foot">
+          <span style="color: var(--text-muted);">Staked: GHS 60.00 (3.0u)</span>
+          <span class="cashout-pill" style="color:var(--green); border-color:rgba(16,185,129,0.3);">NET: -GHS 30.80</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Complete 5-Category Matrix (Verified from SportyBet Transactions) -->
+    <section class="matrix-grid">
+      <div class="matrix-item">
+        <div class="matrix-label">Total Deposits Injected</div>
+        <div class="matrix-value" style="color: var(--text);">GHS 250.00</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">3 Injections (Oct 28-29)</div>
+      </div>
+      <div class="matrix-item">
+        <div class="matrix-label">Real Sport Winnings</div>
+        <div class="matrix-value text-green">GHS 1329.49</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">80.9% of Payouts</div>
+      </div>
+      <div class="matrix-item">
+        <div class="matrix-label">Tactical Cash Outs</div>
+        <div class="matrix-value" style="color: var(--blue);">GHS 313.22</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">19.1% Captured Equities</div>
+      </div>
+      <div class="matrix-item">
+        <div class="matrix-label">Total Bets Deployed</div>
+        <div class="matrix-value text-amber">GHS 1917.38</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">76 Verified Slips (All Settled)</div>
+      </div>
+      <div class="matrix-item">
+        <div class="matrix-label">Capital Withdrawals</div>
+        <div class="matrix-value" style="color: var(--purple);">GHS 0.00</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">100% Compounding Retained</div>
+      </div>
+    </section>
+
+    <!-- Analytics Charts -->
+    <div class="section-title">
+      <span>📈 True Bankroll Trajectory &amp; Daily Net PnL (Wins vs. Drawdowns • Oct 28 – Nov 04)</span>
+      <span class="tag" style="background:var(--green-glow); color:var(--green); border-color:rgba(16,185,129,0.35);">CURRENT BALANCE: GHS 203.71 (100% FUNDS TODAY'S SLATE)</span>
+    </div>
+
+    <section class="analytics-grid">
+      <div class="chart-card">
+        <div class="chart-head">
+          <span class="chart-title text-green">True Liquid Bankroll Equity Curve (Peak: GHS 451.83 ➔ Current: GHS 203.71)</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--amber);">BASE DEPOSIT: GHS 250.00</span>
+        </div>
+        
+    <svg viewBox="0 0 580 195" style="width:100%; height:auto; overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="eqGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0.28"/>
+          <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>
+      <!-- Peak Line (GHS 451.83) -->
+      <line x1="48" y1="33.4" x2="532" y2="33.4" stroke="#1f293d" stroke-dasharray="3" />
+      <text x="42" y="36.4" fill="#6b7280" font-size="9" font-family="monospace" text-anchor="end">452</text>
+      <!-- Deposit Breakeven Baseline (GHS 250.00) -->
+      <line x1="48" y1="93.1" x2="532" y2="93.1" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,3" />
+      <text x="42" y="96.1" fill="#f59e0b" font-size="9" font-weight="700" font-family="monospace" text-anchor="end">250</text>
+      <!-- Bottom Axis -->
+      <line x1="48" y1="167" x2="532" y2="167" stroke="#374151" stroke-width="1.5" />
+      <path d="M 48.0,93.06382978723404 L 101.77777777777777,86.82657446808511 L 155.55555555555554,70.31219148936171 L 209.33333333333334,77.01968085106384 L 263.1111111111111,53.59670212765957 L 316.8888888888889,33.373680851063824 L 370.6666666666667,83.47282978723403 L 424.44444444444446,52.70059574468084 L 478.22222222222223,106.75385106382979 L 532.0,157.2670425531915 L 532.0,167 L 48.0,167 Z" fill="url(#eqGrad)" />
+    <line x1="48.0" y1="93.1" x2="101.8" y2="86.8" stroke="#10b981" stroke-width="3.2" stroke-linecap="round" /><line x1="101.8" y1="86.8" x2="155.6" y2="70.3" stroke="#10b981" stroke-width="3.2" stroke-linecap="round" /><line x1="155.6" y1="70.3" x2="209.3" y2="77.0" stroke="#ef4444" stroke-width="3.2" stroke-linecap="round" /><line x1="209.3" y1="77.0" x2="263.1" y2="53.6" stroke="#10b981" stroke-width="3.2" stroke-linecap="round" /><line x1="263.1" y1="53.6" x2="316.9" y2="33.4" stroke="#10b981" stroke-width="3.2" stroke-linecap="round" /><line x1="316.9" y1="33.4" x2="370.7" y2="83.5" stroke="#ef4444" stroke-width="3.2" stroke-linecap="round" /><line x1="370.7" y1="83.5" x2="424.4" y2="52.7" stroke="#10b981" stroke-width="3.2" stroke-linecap="round" /><line x1="424.4" y1="52.7" x2="478.2" y2="106.8" stroke="#ef4444" stroke-width="3.2" stroke-linecap="round" /><line x1="478.2" y1="106.8" x2="532.0" y2="157.3" stroke="#ef4444" stroke-width="3.2" stroke-linecap="round" />
+        <circle cx="48.0" cy="93.1" r="4.8" fill="#9ca3af" stroke="#090d16" stroke-width="2" />
+        <text x="48.0" y="84.1" fill="#9ca3af" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 250</text>
+        <text x="48.0" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">BASE</text>
+        
+        <circle cx="101.8" cy="86.8" r="4.8" fill="#10b981" stroke="#090d16" stroke-width="2" />
+        <text x="101.8" y="77.8" fill="#10b981" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 271 (+21)</text>
+        <text x="101.8" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-28</text>
+        
+        <circle cx="155.6" cy="70.3" r="4.8" fill="#10b981" stroke="#090d16" stroke-width="2" />
+        <text x="155.6" y="61.3" fill="#10b981" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 327 (+56)</text>
+        <text x="155.6" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-29</text>
+        
+        <circle cx="209.3" cy="77.0" r="4.8" fill="#ef4444" stroke="#090d16" stroke-width="2" />
+        <text x="209.3" y="92.0" fill="#ef4444" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 304 (-23)</text>
+        <text x="209.3" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-30</text>
+        
+        <circle cx="263.1" cy="53.6" r="4.8" fill="#10b981" stroke="#090d16" stroke-width="2" />
+        <text x="263.1" y="44.6" fill="#10b981" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 383 (+79)</text>
+        <text x="263.1" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-31</text>
+        
+        <circle cx="316.9" cy="33.4" r="4.8" fill="#10b981" stroke="#090d16" stroke-width="2" />
+        <text x="316.9" y="24.4" fill="#10b981" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 452 (+68)</text>
+        <text x="316.9" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-01</text>
+        
+        <circle cx="370.7" cy="83.5" r="4.8" fill="#ef4444" stroke="#090d16" stroke-width="2" />
+        <text x="370.7" y="98.5" fill="#ef4444" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 282 (-169)</text>
+        <text x="370.7" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-02</text>
+        
+        <circle cx="424.4" cy="52.7" r="4.8" fill="#10b981" stroke="#090d16" stroke-width="2" />
+        <text x="424.4" y="43.7" fill="#10b981" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 386 (+104)</text>
+        <text x="424.4" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-03</text>
+        
+        <circle cx="478.2" cy="106.8" r="4.8" fill="#ef4444" stroke="#090d16" stroke-width="2" />
+        <text x="478.2" y="121.8" fill="#ef4444" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 204 (-89)</text>
+        <text x="478.2" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-04</text>
+        
+        <circle cx="532.0" cy="157.3" r="4.8" fill="#ef4444" stroke="#090d16" stroke-width="2" />
+        <text x="532.0" y="172.3" fill="#ef4444" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="middle">GHS 33 (-171)</text>
+        <text x="532.0" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-05</text>
+        </svg>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <span class="chart-title" style="color:var(--blue);">Daily Net Profit / Loss (Green Wins vs. Red Losses)</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:#ef4444;">YESTERDAY: -GHS 89.36 (3/6 SLIPS CASHED)</span>
+        </div>
+        
+    <svg viewBox="0 0 580 195" style="width:100%; height:auto; overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+      <!-- Zero Breakeven Line (GHS 0.00 Net PnL) -->
+      <line x1="48" y1="83.6" x2="532" y2="83.6" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="3,2" />
+      <text x="42" y="86.6" fill="#9ca3af" font-size="9.5" font-weight="700" font-family="monospace" text-anchor="end">0</text>
+      <line x1="48" y1="167" x2="532" y2="167" stroke="#374151" stroke-width="1" />
     
-    <!-- Top Financial KPI Grid -->
-    <section class="metrics-grid">
-      <div class="metric-card green">
-        <div class="metric-label">Vault Balance <span>SPORTYBET</span></div>
-        <div class="metric-value" id="valVaultBalance">GHS 386.46</div>
-        <div class="metric-sub" id="valNetProfit">+136.46 GHS (+54.58% PnL)</div>
-      </div>
-
-      <div class="metric-card amber">
-        <div class="metric-label">Compounded ARR <span>ANNUALIZED</span></div>
-        <div class="metric-value" id="valArr">+384.2%</div>
-        <div class="metric-sub">Ratchet Compounded Target</div>
-      </div>
-
-      <div class="metric-card blue">
-        <div class="metric-label">Return On Investment <span>ROI</span></div>
-        <div class="metric-value" id="valRoi">+54.58%</div>
-        <div class="metric-sub">Base: GHS 250.00 | Net: +GHS 136.46</div>
-      </div>
-
-      <div class="metric-card purple">
-        <div class="metric-label">Cashout Capture Rate <span>DISCIPLINE</span></div>
-        <div class="metric-value" id="valCashoutRate">93.6%</div>
-        <div class="metric-sub">Immutable Trigger: &ge; 92.0%</div>
-      </div>
-
-      <div class="metric-card green">
-        <div class="metric-label">Dynamic Unit <span>1.0U ALLOCATION</span></div>
-        <div class="metric-value" id="valUnit">GHS 20.00</div>
-        <div class="metric-sub" id="valReserve">Reserve: GHS 186.46 Liquid</div>
-      </div>
-
-      <div class="metric-card blue">
-        <div class="metric-label">Daily Slate Capacity <span>10.0U</span></div>
-        <div class="metric-value" id="valDailyDeployment">GHS 200.00</div>
-        <div class="metric-sub">4 Tiers (Strict Zero Overlap)</div>
-      </div>
-    </section>
-
-    <!-- Main Visuals & Bloomberg Charts -->
-    <section class="telemetry-row">
-      <!-- Equity Growth Curve -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0V0zm10 5l-4 4-3-3L1 8.5 2 9.5l2-1.5 3 3 5-5 2.5 2.5L16 7l-6-2z"/></svg>
-            Bankroll Compounding Equity Curve (GHS)
-          </div>
-          <div class="panel-tag" id="equityTag">NOV 01 ATH: GHS 386.46</div>
-        </div>
-        <div style="height: 240px; position: relative;">
-          <canvas id="equityChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Heuristic Weights & Nous Hermes Engine -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm1 12H7V7h2v5zm0-6H7V4h2v2z"/></svg>
-            Learned Heuristic Matrix
-          </div>
-          <div class="panel-tag">NOUS HERMES CORE</div>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 8px;" id="heuristicsContainer">
-          <!-- Populated by JS -->
-        </div>
+        <rect x="59.9" y="73.8" width="30" height="9.8" rx="4" fill="#10b981" fill-opacity="0.88" />
+        <text x="74.9" y="67.8" fill="#10b981" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">+21</text>
+        <text x="74.9" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-28</text>
+        
+        <rect x="113.7" y="57.7" width="30" height="25.9" rx="4" fill="#10b981" fill-opacity="0.88" />
+        <text x="128.7" y="51.7" fill="#10b981" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">+56</text>
+        <text x="128.7" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-29</text>
+        
+        <rect x="167.4" y="83.6" width="30" height="10.5" rx="4" fill="#ef4444" fill-opacity="0.88" />
+        <text x="182.4" y="106.1" fill="#ef4444" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">-23</text>
+        <text x="182.4" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-30</text>
+        
+        <rect x="221.2" y="46.9" width="30" height="36.7" rx="4" fill="#10b981" fill-opacity="0.88" />
+        <text x="236.2" y="40.9" fill="#10b981" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">+79</text>
+        <text x="236.2" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">10-31</text>
+        
+        <rect x="275.0" y="51.9" width="30" height="31.7" rx="4" fill="#10b981" fill-opacity="0.88" />
+        <text x="290.0" y="45.9" fill="#10b981" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">+68</text>
+        <text x="290.0" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-01</text>
+        
+        <rect x="328.8" y="83.6" width="30" height="78.5" rx="4" fill="#ef4444" fill-opacity="0.88" />
+        <text x="343.8" y="174.1" fill="#ef4444" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">-169</text>
+        <text x="343.8" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-02</text>
+        
+        <rect x="382.6" y="35.4" width="30" height="48.2" rx="4" fill="#10b981" fill-opacity="0.88" />
+        <text x="397.6" y="29.4" fill="#10b981" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">+104</text>
+        <text x="397.6" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-03</text>
+        
+        <rect x="436.3" y="83.6" width="30" height="41.4" rx="4" fill="#ef4444" fill-opacity="0.88" />
+        <text x="451.3" y="137.0" fill="#ef4444" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">-89</text>
+        <text x="451.3" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-04</text>
+        
+        <rect x="490.1" y="83.6" width="30" height="79.1" rx="4" fill="#ef4444" fill-opacity="0.88" />
+        <text x="505.1" y="174.7" fill="#ef4444" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">-171</text>
+        <text x="505.1" y="183" fill="#9ca3af" font-size="10" font-family="monospace" text-anchor="middle">11-05</text>
+        </svg>
       </div>
     </section>
 
-    <!-- 4-Tier Blueprint Matrix -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h11A1.5 1.5 0 0 1 15 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-11z"/></svg>
-          Sunday, November 1, 2026: 4-Tier Slate Execution Slips
+    <!-- MULTI-HORIZON PERFORMANCE LEDGER (DAILY, WEEKLY, MONTHLY) -->
+    <div class="section-title">
+      <span>📊 Multi-Horizon Performance Audit (Daily, Weekly &amp; Monthly PnL Ledger)</span>
+      <span class="tag">4 WINNING DAYS • 3 LOSING DAYS • PLAN A: 5W - 1C - 1L</span>
+    </div>
+
+    <section class="analytics-grid" style="margin-bottom: 24px;">
+      <!-- Daily Breakdown Table -->
+      <div class="chart-card" style="grid-column: 1 / -1; overflow-x: auto;">
+        <div class="chart-head">
+          <span class="chart-title" style="color:#fff;">1. Day-by-Day Campaign Ledger (Showing Every Win, Loss &amp; Plan A Outcome)</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted);">BASE CAPITAL: GHS 250.00</span>
         </div>
-        <div class="panel-tag">10.0U DEPLOYMENT (ZERO OVERLAP)</div>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Staked</th>
+              <th>Gross Return</th>
+              <th>Net PnL (GHS / Units)</th>
+              <th>Daily ROI</th>
+              <th>Plan A (Vault Grinder)</th>
+              <th>Ending Bankroll</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr>
+          <td style="font-weight:700;">2026-11-05</td>
+          <td>GHS 200.00</td>
+          <td>GHS 29.20</td>
+          <td class="text-red" style="font-weight:800;">-170.80 (-8.54u)</td>
+          <td class="text-red">-85.40%</td>
+          <td><span class="badge badge-red">LOST (-GHS 170.80)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 32.91</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-11-04</td>
+          <td>GHS 200.00</td>
+          <td>GHS 110.64</td>
+          <td class="text-red" style="font-weight:800;">-89.36 (-4.47u)</td>
+          <td class="text-red">-44.68%</td>
+          <td><span class="badge badge-amber">CASHED OUT (-GHS 56.56)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 203.71</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-11-03</td>
+          <td>GHS 200.00</td>
+          <td>GHS 304.05</td>
+          <td class="text-green" style="font-weight:800;">+104.05 (+5.20u)</td>
+          <td class="text-green">+52.02%</td>
+          <td><span class="badge badge-green">WON (+GHS 181.19)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 386.48</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-11-02</td>
+          <td>GHS 200.00</td>
+          <td>GHS 30.60</td>
+          <td class="text-red" style="font-weight:800;">-169.40 (-8.47u)</td>
+          <td class="text-red">-84.70%</td>
+          <td><span class="badge badge-red">LOST (-GHS 100.00)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 282.43</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-11-01</td>
+          <td>GHS 151.00</td>
+          <td>GHS 219.38</td>
+          <td class="text-green" style="font-weight:800;">+68.38 (+3.42u)</td>
+          <td class="text-green">+45.28%</td>
+          <td><span class="badge badge-green">WON (+GHS 84.46)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 451.83</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-10-31</td>
+          <td>GHS 237.00</td>
+          <td>GHS 316.20</td>
+          <td class="text-green" style="font-weight:800;">+79.20 (+3.96u)</td>
+          <td class="text-green">+33.42%</td>
+          <td><span class="badge badge-green">WON (+GHS 158.43)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 383.45</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-10-30</td>
+          <td>GHS 200.00</td>
+          <td>GHS 177.32</td>
+          <td class="text-red" style="font-weight:800;">-22.68 (-1.13u)</td>
+          <td class="text-red">-11.34%</td>
+          <td><span class="badge badge-green">WON (+GHS 177.32)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 304.25</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-10-29</td>
+          <td>GHS 225.00</td>
+          <td>GHS 280.84</td>
+          <td class="text-green" style="font-weight:800;">+55.84 (+2.79u)</td>
+          <td class="text-green">+24.82%</td>
+          <td><span class="badge badge-green">WON (+GHS 164.97)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 326.93</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;">2026-10-28</td>
+          <td>GHS 179.38</td>
+          <td>GHS 200.47</td>
+          <td class="text-green" style="font-weight:800;">+21.09 (+1.05u)</td>
+          <td class="text-green">+11.76%</td>
+          <td><span class="badge badge-green">WON (+GHS 86.27)</span></td>
+          <td style="font-weight:700; color:#fff;">GHS 271.09</td>
+        </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="tickets-matrix" id="ticketsContainer">
-        <!-- Populated by JS -->
+
+      <!-- Weekly Rollup Table -->
+      <div class="chart-card" style="overflow-x: auto;">
+        <div class="chart-head">
+          <span class="chart-title" style="color:var(--blue);">2. Weekly Performance Rollup</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--blue);">WEEK 1 vs WEEK 2</span>
+        </div>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th>Week Window</th>
+              <th>Staked</th>
+              <th>Returned</th>
+              <th>Net PnL</th>
+              <th>ROI %</th>
+              <th>Plan A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;">Week 1 (Oct 28 – Nov 01)</td>
+              <td>GHS 992.38</td>
+              <td>GHS 1194.21</td>
+              <td class="text-green" style="font-weight:800;">+GHS 201.83 (+10.09u)</td>
+              <td class="text-green">+20.34%</td>
+              <td><span class="badge badge-green">5W - 0L</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;">Week 2 (Nov 02 – Present)</td>
+              <td>GHS 600.00</td>
+              <td>GHS 445.29</td>
+              <td class="text-red" style="font-weight:800;">-GHS 154.71 (-7.74u)</td>
+              <td class="text-red">-25.79%</td>
+              <td><span class="badge badge-amber">1W - 1C - 1L</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Monthly Rollup Table -->
+      <div class="chart-card" style="overflow-x: auto;">
+        <div class="chart-head">
+          <span class="chart-title text-amber">3. Monthly Performance Rollup</span>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--amber);">OCT 2026 vs NOV 2026</span>
+        </div>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Staked</th>
+              <th>Returned</th>
+              <th>Net PnL</th>
+              <th>ROI %</th>
+              <th>Bankroll Range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;">October 2026 (4 Days)</td>
+              <td>GHS 841.38</td>
+              <td>GHS 974.83</td>
+              <td class="text-green" style="font-weight:800;">+GHS 133.45 (+6.67u)</td>
+              <td class="text-green">+15.86%</td>
+              <td>GHS 250 ➔ GHS 383.45</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;">November 2026 (4 Days)</td>
+              <td>GHS 751.00</td>
+              <td>GHS 664.67</td>
+              <td class="text-red" style="font-weight:800;">-GHS 86.33 (-4.32u)</td>
+              <td class="text-red">-11.50%</td>
+              <td>GHS 383.45 ➔ GHS 203.71</td>
+            </tr>
+            <tr style="background:rgba(16,185,129,0.06);">
+              <td style="font-weight:800; color:#fff;">ALL-TIME SETTLED (8 DAYS)</td>
+              <td style="font-weight:700;">GHS 1592.38</td>
+              <td style="font-weight:700;">GHS 1642.71</td>
+              <td class="text-green" style="font-weight:800;">+GHS 50.33 (+2.52u)</td>
+              <td class="text-green">+3.16% Algorithmic</td>
+              <td style="font-weight:700; color:var(--green);">GHS 203.71 Liquid</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <!-- Real-Time Decision Feed & Self-Authored Tool Registry -->
-    <section class="telemetry-row">
-      <!-- Live Bloomberg Decision Feed -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7 4h2v5H7V4zm1 7a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-            Agent Autonomous Decision Feed
+    <!-- YESTERDAY'S SETTLED POST-MORTEM AUDIT -->
+    <div class="section-title">
+      <span>📋 Yesterday's Settled Post-Mortem Audit (Wednesday, Nov 4 • 3/6 Slips Cashed • Liquid Wallet GHS 203.71)</span>
+      <span class="tag" style="background:var(--green-glow); color:var(--green); border-color:rgba(16,185,129,0.35);">+GHS 110.64 PAID OUT</span>
+    </div>
+
+    <section class="slips-grid">
+      <div class="slip-card">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name text-green">WEDNESDAY WINNERS &amp; CASHOUTS</span>
+            <span class="badge badge-green">3/6 SLIPS CASHED (+GHS 110.64)</span>
           </div>
-          <div class="panel-tag">REAL-TIME SENTINEL</div>
-        </div>
-        <div class="decision-feed" id="decisionFeedContainer">
-          <!-- Populated by JS -->
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">🏆 Single 2A: Borussia Dortmund vs Real Betis — Home @ 1.77</div>
+                <div class="leg-pick">Dortmund victory at Westfalenstadion! Paid +GHS 35.40 into SportyBet wallet.</div>
+              </div>
+              <div class="leg-score text-green">WON<br><span style="font-size:10px;">+GHS 35.40</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">🏆 Single 2B: RB Leipzig vs Manchester City — Away @ 1.59</div>
+                <div class="leg-pick">Man City victory at Red Bull Arena! Paid +GHS 31.80 into SportyBet wallet.</div>
+              </div>
+              <div class="leg-score text-green">WON<br><span style="font-size:10px;">+GHS 31.80</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">⚡ Ticket 1 Cashout Salvage (GHS 43.44)</div>
+                <div class="leg-pick">At 85' tied 2-2 in Athens, cashout secured 43.44% capital vs total wipeout!</div>
+              </div>
+              <div class="leg-score text-amber">SALVAGED<br><span style="font-size:10px;">+GHS 43.44</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Self-Authored Dynamic Tools -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 0v16l4-4h10V0H1zm13 11H4.59L3 12.59V1h11v10z"/></svg>
-            Nous Hermes Tool Factory
+      <div class="slip-card">
+        <div>
+          <div class="slip-head">
+            <span class="slip-name" style="color:var(--blue);">ROOT-CAUSE AUDIT &amp; HEURISTIC CALIBRATION</span>
+            <span class="badge badge-blue">HEURISTICS 10, 11, 12</span>
           </div>
-          <div class="panel-tag">SELF-SYNTHESIZED</div>
-        </div>
-        <div id="dynamicToolsContainer" style="display: flex; flex-direction: column; gap: 8px;">
-          <!-- Populated by JS -->
+          <div class="slip-legs">
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">#10: Mid-Week European Away Favorite Volatility Filter</div>
+                <div class="leg-pick">Never anchor 1X2 Away Moneylines in mid-week UCL/UEL ties; pivot strictly to Dominant Home or Goals.</div>
+              </div>
+              <div class="leg-score" style="color:var(--text-muted);">LOCKED<br><span style="font-size:10px;">FILTER ACTIVE</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">#11: Zero-Tolerance Stoppage-Time Tilt Lock</div>
+                <div class="leg-pick">Absolute ban on emotional live hedging in 85'+; accept algorithm cashout or let ride.</div>
+              </div>
+              <div class="leg-score" style="color:var(--text-muted);">LOCKED<br><span style="font-size:10px;">BAN CODIFIED</span></div>
+            </div>
+            <div class="leg-row">
+              <div>
+                <div class="leg-match">#12: Uncompressed Thursday 10.0u = GHS 200.00 Standard Fully Funded</div>
+                <div class="leg-pick">Liquid wallet of GHS 203.71 completely funds Thursday's 10.0u slate with zero fresh deposit needed!</div>
+              </div>
+              <div class="leg-score text-green">READY<br><span style="font-size:10px; color:var(--green);">GHS 203.71 CASH</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-  </main>
+    <footer class="footer">
+      BERMESI AUTONOMOUS ENGINE • PERSISTENT SQLITE DATABASE • ZERO SPORTYBET RISK • SYNC: 21:11 GMT
+    </footer>
 
-  <!-- Interactive Floating Bermesi Chat & Prompt Drawer -->
-  <aside class="chat-drawer collapsed" id="chatDrawer">
-    <div class="chat-header" id="chatHeader">
-      <div class="chat-header-title">
-        <div class="status-pulse"></div>
-        <span>💬 BERMESI REMOTE COPILOT</span>
-        <span class="brand-badge" style="font-size: 8px;">ONLINE 24/7</span>
-      </div>
-      <span class="chat-toggle-icon">▲</span>
-    </div>
+  </div>
 
-    <div class="chat-body" id="chatBody">
-      <div class="chat-msg agent">
-        <b>Bermesi Sentinel:</b> Hello! I am running autonomously on your dedicated host. You can query balance, audit live in-play cashouts, inspect Sunday slates, or prompt me for any action right here from your phone.
-      </div>
-    </div>
-
-    <div style="padding: 0 12px 6px;">
-      <div class="chat-quick-actions">
-        <button class="quick-pill" onclick="sendQuickPrompt('Check Vault Balance')">⚡ Balance</button>
-        <button class="quick-pill" onclick="sendQuickPrompt('Show Sunday Slate')">📋 Sunday Slate</button>
-        <button class="quick-pill" onclick="sendQuickPrompt('Audit Cashout Equity')">🎯 Cashout Audit</button>
-        <button class="quick-pill" onclick="sendQuickPrompt('Verify Final Scores')">🔍 Verify Yokohama</button>
-        <button class="quick-pill" onclick="sendQuickPrompt('Check Heuristic Weights')">🧠 Heuristics</button>
-      </div>
-    </div>
-
-    <div class="chat-input-bar">
-      <input type="text" id="chatInput" class="chat-input" placeholder="Prompt Bermesi or type command..." autocomplete="off">
-      <button class="chat-send-btn" id="chatSendBtn">SEND</button>
-    </div>
-  </aside>
-
+  <!-- Smooth Scroll-Memory & Controlled Refresh Engine -->
   <script>
-    // Live GMT Clock
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getUTCHours()).padStart(2, '0');
-      const m = String(now.getUTCMinutes()).padStart(2, '0');
-      const s = String(now.getUTCSeconds()).padStart(2, '0');
-      document.getElementById('clockGmt').textContent = `${h}:${m}:${s} GMT`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    let chartInstance = null;
-    let globalTelemetry = null;
-
-    // Fetch and Render Telemetry Data
-    async function loadTelemetry() {
-      try {
-        const res = await fetch('data/telemetry.json?t=' + Date.now());
-        if (!res.ok) throw new Error('Telemetry unavailable');
-        const data = await res.json();
-        globalTelemetry = data;
-        renderDashboard(data);
-      } catch (err) {
-        console.warn('Using cached telemetry fallback:', err.message);
-      }
-    }
-
-    function renderDashboard(data) {
-      // Financial KPIs
-      document.getElementById('valVaultBalance').textContent = `GHS ${data.financials.currentVaultBalance.toFixed(2)}`;
-      document.getElementById('valNetProfit').textContent = `+${data.financials.netProfit.toFixed(2)} GHS (+${data.financials.roiPercent}% PnL)`;
-      document.getElementById('valArr').textContent = `+${data.financials.projectedArrPercent}%`;
-      document.getElementById('valRoi').textContent = `+${data.financials.roiPercent}%`;
-      document.getElementById('valCashoutRate').textContent = `${data.financials.avgCashoutEquityCapturedPercent}%`;
-      document.getElementById('valUnit').textContent = `GHS ${data.financials.baseUnit.toFixed(2)}`;
-      document.getElementById('valReserve').textContent = `Reserve: GHS ${data.financials.liquidVaultReserve.toFixed(2)} Liquid`;
-      document.getElementById('valDailyDeployment').textContent = `GHS ${data.financials.dailyDeploymentStake.toFixed(2)}`;
-      document.getElementById('currentPhase').textContent = data.schedule.activePhase;
-
-      // Render Equity Chart
-      renderChart(data.equityHistory);
-
-      // Render Heuristics
-      const hCont = document.getElementById('heuristicsContainer');
-      hCont.innerHTML = '';
-      const weights = data.learningIntelligence.activeHeuristicWeights;
-      const weightLabels = [
-        { label: 'NBA Spread Cap (Single)', val: `${weights.maxNbaSpreadSingle} pts`, desc: 'Strict limit under -9.5' },
-        { label: 'Mandatory Cashout Threshold', val: `${(weights.cashoutTriggerRatio * 100).toFixed(0)}% True Equity`, desc: 'Automatic lock >= 92%' },
-        { label: 'Cup-Rematch Filter', val: 'ACTIVE', desc: 'Eliminates 72h cup rematches (Frankfurt/HSV)' },
-        { label: 'Back-to-Back Rest Penalty', val: `-${(weights.roadBackToBackPenalty * 100).toFixed(0)}%`, desc: 'Fatigued road team paint filter' }
-      ];
-
-      weightLabels.forEach(w => {
-        const el = document.createElement('div');
-        el.className = 'ticket-detail';
-        el.style.padding = '8px';
-        el.style.background = 'rgba(255, 255, 255, 0.02)';
-        el.style.borderRadius = '4px';
-        el.innerHTML = `
-          <div>
-            <div style="color: #fff; font-weight: 700;">${w.label}</div>
-            <div style="font-size: 10px; color: var(--text-muted);">${w.desc}</div>
-          </div>
-          <div style="font-weight: 800; color: var(--accent-amber);">${w.val}</div>
-        `;
-        hCont.appendChild(el);
-      });
-
-      // Render Tickets
-      const tCont = document.getElementById('ticketsContainer');
-      tCont.innerHTML = '';
-      data.portfolio.forEach(t => {
-        let statusClass = 'status-pending';
-        if (t.status.includes('WON')) statusClass = 'status-won';
-        else if (t.status.includes('ARMED')) statusClass = 'status-armed';
-        else if (t.status.includes('CASHED')) statusClass = 'status-cashout';
-
-        const card = document.createElement('div');
-        card.className = 'ticket-card';
-        card.innerHTML = `
-          <div class="ticket-card-header">
-            <span class="ticket-name">${t.tier}: ${t.name}</span>
-            <span class="ticket-status ${statusClass}">${t.status}</span>
-          </div>
-          <div class="ticket-detail">Allocation: <b>${t.allocation}</b></div>
-          <div class="ticket-detail">Picks: <b style="text-align: right; max-width: 65%;">${t.structure}</b></div>
-          <div class="ticket-detail">Target Odds: <b>${t.odds}</b></div>
-          <div class="ticket-detail">Potential Return: <b style="color: var(--accent-green);">${t.targetPayout ? 'GHS ' + t.targetPayout.toFixed(2) : 'Dynamic'}</b></div>
-          ${t.finalScore ? `<div class="ticket-detail">Verified Final Score: <b style="color: var(--accent-green);">${t.finalScore}</b></div>` : ''}
-          <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">${t.objective}</div>
-        `;
-        tCont.appendChild(card);
-      });
-
-      // Render Decisions
-      const dCont = document.getElementById('decisionFeedContainer');
-      dCont.innerHTML = '';
-      data.recentDecisions.forEach(d => {
-        const entry = document.createElement('div');
-        entry.className = `decision-entry ${d.type}`;
-        entry.innerHTML = `
-          <div class="decision-top">
-            <span class="decision-brain">[${d.brain}]</span>
-            <span>${d.time}</span>
-          </div>
-          <div style="color: #fff;">${d.summary}</div>
-        `;
-        dCont.appendChild(entry);
-      });
-
-      // Render Tools
-      const dtCont = document.getElementById('dynamicToolsContainer');
-      dtCont.innerHTML = '';
-      data.learningIntelligence.synthesizedTools.forEach(tool => {
-        const row = document.createElement('div');
-        row.style.padding = '8px';
-        row.style.background = 'rgba(168, 85, 247, 0.08)';
-        row.style.border = '1px solid rgba(168, 85, 247, 0.25)';
-        row.style.borderRadius = '4px';
-        row.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-            <b style="color: var(--accent-purple); font-size: 11px;">${tool.name}</b>
-            <span class="code-pill">${tool.status}</span>
-          </div>
-          <div style="font-size: 10px; color: var(--text-muted);">${tool.description}</div>
-        `;
-        dtCont.appendChild(row);
-      });
-    }
-
-    function renderChart(history) {
-      const ctx = document.getElementById('equityChart').getContext('2d');
-      if (chartInstance) chartInstance.destroy();
-
-      const labels = history.map(h => h.date);
-      const points = history.map(h => h.balance);
-
-      chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Bankroll (GHS)',
-            data: points,
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.12)',
-            borderWidth: 2.5,
-            fill: true,
-            tension: 0.35,
-            pointBackgroundColor: '#10b981',
-            pointBorderColor: '#fff',
-            pointRadius: 4,
-            pointHoverRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            x: {
-              grid: { color: 'rgba(255, 255, 255, 0.04)' },
-              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } }
-            },
-            y: {
-              grid: { color: 'rgba(255, 255, 255, 0.04)' },
-              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } }
-            }
-          }
-        }
-      });
-    }
-
-    // Interactive Chat Logic
-    const drawer = document.getElementById('chatDrawer');
-    const header = document.getElementById('chatHeader');
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('chatSendBtn');
-
-    header.addEventListener('click', () => {
-      drawer.classList.toggle('collapsed');
-      if (!drawer.classList.contains('collapsed')) {
-        setTimeout(() => chatInput.focus(), 300);
+    window.addEventListener('scroll', () => {
+      sessionStorage.setItem('bermesi_terminal_scroll_y', window.scrollY);
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedY = sessionStorage.getItem('bermesi_terminal_scroll_y');
+      if (savedY !== null) {
+        window.scrollTo({ top: parseInt(savedY), behavior: 'instant' });
       }
     });
 
-    function appendMessage(sender, text) {
-      const msg = document.createElement('div');
-      msg.className = `chat-msg ${sender}`;
-      msg.innerHTML = sender === 'agent' ? `<b>Bermesi:</b> ${text}` : `<b>You:</b> ${text}`;
-      chatBody.appendChild(msg);
-      chatBody.scrollTop = chatBody.scrollHeight;
+    let autoRefreshEnabled = true;
+    let refreshTimer = null;
+
+    function scheduleNextRefresh() {
+      if (refreshTimer) clearTimeout(refreshTimer);
+      if (autoRefreshEnabled) {
+        refreshTimer = setTimeout(() => {
+          window.location.reload();
+        }, 60000);
+      }
     }
 
-    async function handleUserPrompt(promptText) {
-      if (!promptText.trim()) return;
-      appendMessage('user', promptText);
-      chatInput.value = '';
-
-      // Check if local gateway is responding
-      try {
-        const res = await fetch('http://localhost:8787/api/prompt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: promptText })
-        });
-        if (res.ok) {
-          const answer = await res.json();
-          appendMessage('agent', answer.reply);
-          return;
-        }
-      } catch (e) {
-        // Fallback to intelligent embedded copilot response
+    function toggleAutoRefresh() {
+      autoRefreshEnabled = !autoRefreshEnabled;
+      const btn = document.getElementById('refreshToggle');
+      if (autoRefreshEnabled) {
+        btn.innerText = 'Auto-Refresh: ON (60s)';
+        btn.classList.add('active');
+        scheduleNextRefresh();
+      } else {
+        btn.innerText = 'Auto-Refresh: PAUSED';
+        btn.classList.remove('active');
+        if (refreshTimer) clearTimeout(refreshTimer);
       }
-
-      const pLower = promptText.toLowerCase();
-      setTimeout(() => {
-        if (pLower.includes('balance') || pLower.includes('vault')) {
-          const bal = globalTelemetry ? globalTelemetry.financials.currentVaultBalance.toFixed(2) : '386.46';
-          const reserve = globalTelemetry ? globalTelemetry.financials.liquidVaultReserve.toFixed(2) : '376.46';
-          appendMessage('agent', `Current Vault Balance is **GHS ${bal}** (Liquid Reserve: **GHS ${reserve}**, In-Play: **GHS 10.00**). Rate of Return: **+54.58% ROI**.`);
-        } else if (pLower.includes('what next') || pLower.includes('what would you do next') || pLower.includes('next') || pLower.includes('action') || pLower.includes('roadmap')) {
-          appendMessage('agent', `**Immediate Bermesi Operational Roadmap:**<br>` +
-            `1. <b>14:00 GMT Kickoff:</b> Deploy <b>Single 2A</b> (S.S. Lazio vs Cagliari Calcio Home Win @ 1.52, GHS 20.00 stake).<br>` +
-            `2. <b>15:15 & 16:15 GMT:</b> Deploy <b>Ticket 1 (Plan A: The Vault Grinder)</b>: Real Madrid ML (1.24) + Lyon ML (1.46) @ 1.81 (GHS 100.00 stake).<br>` +
-            `3. <b>16:30 GMT:</b> Deploy <b>Ticket 4 (Plan D: Chrono Arbitrage)</b>: Frankfurt O1.5 + Marseille 1X + Warriors ML @ 2.60 (GHS 10.00 stake).<br>` +
-            `4. <b>18:25 - 21:50 GMT:</b> Real-time equity telemetry on Ticket 3 (Como + LIV-ARS O1.5); trigger <b>Mandatory Cashout Lock</b> if offer &ge; 92% true equity.<br>` +
-            `5. <b>22:00 GMT:</b> Deploy <b>Single 2C / Ticket 3 Completion</b> (Indiana Pacers ML @ 1.62, GHS 20.00 stake) to fulfill Plan C cross-sport multiplier.`);
-        } else if (pLower.includes('incident') || pLower.includes('pacers') || pLower.includes('como')) {
-          appendMessage('agent', `<b>Ticket 3 Wave 1 Incident Log:</b> NBA Pacers ML had a DOM hydration race condition during rapid pre-kickoff navigation (<2 min to 11:30 GMT). To protect the entry, Como + LIV-ARS O1.5 was locked at GHS 10.00. The remaining GHS 20.00 is designated for Pacers ML (Single 2C) prior to 22:00 GMT tip-off.`);
-        } else if (pLower.includes('slate') || pLower.includes('ticket') || pLower.includes('sunday')) {
-          appendMessage('agent', `Sunday Slate Loaded (10.0u / GHS 200.00):<br>` +
-            `• <b>Ticket 1 (Plan A - GHS 100)</b>: Real Madrid (1.24) + Lyon (1.46) @ 1.81 (15:15 GMT)<br>` +
-            `• <b>Single 2A (Plan B - GHS 20)</b>: S.S. Lazio to Win @ 1.52 (14:00 GMT)<br>` +
-            `• <b>Single 2B (Plan B - GHS 20)</b>: Boston Celtics -5.5 @ 1.75 (20:30 GMT)<br>` +
-            `• <b>Single 2C (Plan B - GHS 20)</b>: Indiana Pacers ML @ 1.62 (22:00 GMT)<br>` +
-            `• <b>Ticket 3 (Plan C - GHS 10 Active + GHS 20 Staged)</b>: Como ML + LIV-ARS O1.5 + Pacers ML<br>` +
-            `• <b>Ticket 4 (Plan D - GHS 10)</b>: Frankfurt O1.5 + Marseille 1X + Warriors ML (16:30 GMT)`);
-        } else if (pLower.includes('yokohama') || pLower.includes('score')) {
-          appendMessage('agent', `Verified Final Outcome: <b>Yokohama F. Marinos defeated Kawasaki Frontale 4–1 FT</b> at Nissan Stadium (Tono 12', Kondo 28', Tanimura 41', Quiñones 69'). Full payout of <b>GHS 1.18</b> settled to vault.`);
-        } else if (pLower.includes('cashout')) {
-          appendMessage('agent', `Cashout Sentinel active: Mandatory trigger floor is strictly locked at <b>&ge; 92.0% true mathematical equity</b>. Ticket 3 pre-NBA cashout window opens between 18:25 and 21:50 GMT.`);
-        } else if (pLower.includes('heuristic') || pLower.includes('rule')) {
-          appendMessage('agent', `Active Learned Heuristics:<br>` +
-            `1. NBA Spread Cap: strictly capped under -9.5 (Celtics -5.5, Lakers -4.5).<br>` +
-            `2. Immediate Cup-Rematch Filter: Frankfurt removed from singles; replaced with Lazio.<br>` +
-            `3. Cashout lock: &ge; 92% equity.<br>` +
-            `4. Mandate: Flexi, 1UP, EarlyGoals remain unchecked.`);
-        } else {
-          appendMessage('agent', `Instruction received: "${promptText}". Bermesi cognitive harness is armed. Active Live Position: Ticket 3 Wave 1 (Como vs Venezia). Next target kickoff: S.S. Lazio vs Cagliari at 14:00 GMT.`);
-        }
-      }, 500);
     }
 
-    sendBtn.addEventListener('click', () => handleUserPrompt(chatInput.value));
-    chatInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleUserPrompt(chatInput.value);
-    });
-
-    window.sendQuickPrompt = function(text) {
-      if (drawer.classList.contains('collapsed')) {
-        drawer.classList.remove('collapsed');
-      }
-      handleUserPrompt(text);
-    };
-
-    loadTelemetry();
-    setInterval(loadTelemetry, 30000);
+    scheduleNextRefresh();
   </script>
 </body>
 </html>
