@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BERMESI // Bloomberg-Grade KPI Terminal</title>
+  <title>BERMESI // Bloomberg-Grade KPI Terminal (Saturday Evening In-Play)</title>
   <style>
     :root {
       --bg: #090d16;
@@ -232,13 +232,13 @@
         <div class="pulse-dot"></div>
         <div>
           <div class="title">BERMESI EXECUTIVE TERMINAL // HERMES v4.5</div>
-          <div style="font-size: 12px; color: var(--text-muted);">Persistent SQLite Ledger • 12 Hardened Heuristics • Zero Confirmation Delay</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Persistent SQLite Ledger • 12 Hardened Heuristics • Live In-Play Telemetry</div>
         </div>
       </div>
       <div class="meta" style="display:flex; align-items:center; gap:12px;">
         <div>
           <div>DATABASE: <b style="color:var(--blue);">bermesi_ledger.sqlite</b></div>
-          <div style="color:var(--text-muted);">LAST SYNC: <b style="color:#fff;" id="syncTime">10:42 GMT (Saturday Nov 14 Live Portfolio)</b></div>
+          <div style="color:var(--text-muted);">LAST SYNC: <b style="color:#fff;" id="syncTime">19:53 GMT (Saturday Nov 14 Live In-Play)</b></div>
         </div>
         <div>
           <button class="ctrl-btn active" id="refreshToggle" onclick="toggleAutoRefresh()">Auto-Refresh: ON (60s)</button>
@@ -249,38 +249,38 @@
     <!-- Top KPIs -->
     <section class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">Current Liquid Reserve</div>
-        <div class="kpi-value text-green">GHS 11.81</div>
-        <div class="kpi-sub" style="color: var(--green);">Untouched Cash Buffer (32.1% of Total Bankroll)</div>
+        <div class="kpi-label">Current Liquid Wallet</div>
+        <div class="kpi-value text-green">GHS 9.52</div>
+        <div class="kpi-sub" style="color: var(--green);">Verified Live Balance on SportyBet Ghana</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Active Staked In-Flight</div>
-        <div class="kpi-value text-amber">GHS 25.00</div>
-        <div class="kpi-sub">Saturday 4-Tier Portfolio (GHS 23.50 + GHS 1.50 Aux)</div>
+        <div class="kpi-label">Active Open Bets (6 Live)</div>
+        <div class="kpi-value text-amber">GHS 21.40</div>
+        <div class="kpi-sub">5 Hermes Slips (GHS 21.00) + 1 Aux (GHS 0.40)</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Total Sandbox Equity</div>
-        <div class="kpi-value" style="color: var(--blue);">GHS 36.81</div>
-        <div class="kpi-sub">100.00% Reconciled (GHS 11.81 Cash + GHS 25.00 Staked)</div>
+        <div class="kpi-label">Total Live Equity</div>
+        <div class="kpi-value" style="color: var(--blue);">GHS 30.92</div>
+        <div class="kpi-sub">GHS 9.52 Cash + GHS 21.40 Active In-Play Slips</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">All-Time Winnings Paid</div>
-        <div class="kpi-value" style="color: var(--purple);">GHS 1695.61</div>
-        <div class="kpi-sub">41 SportyBet Settlements Verified in SQLite Ledger</div>
+        <div class="kpi-value" style="color: var(--purple);">GHS 1698.12</div>
+        <div class="kpi-sub">43 SportyBet Settlements Verified in SQLite Ledger</div>
       </div>
     </section>
 
-    <!-- HEURISTIC #12 CAPITAL PROTOCOL BANNER -->
+    <!-- LIVE IN-PLAY STATUS BANNER -->
     <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 12px 16px; margin-bottom: 22px; font-size: 12.5px; display: flex; justify-content: space-between; align-items: center;">
       <div>
-        <b style="color: var(--green);">🚀 SATURDAY NOV 14 PORTFOLIO AUTONOMOUSLY BOOKED:</b> Friday Night's NBA slate settled with <b style="color:#fff;">3/6 slips won (+GHS 12.94 returned)</b>, bringing Saturday morning equity to <b style="color:var(--blue);">GHS 36.81</b>. Saturday's 4-Tier Portfolio (UEFA Nations League + AFCON Qualifiers + CONCACAF + NBA) is now 100% live on SportyBet Ghana (<b style="color:var(--amber);">GHS 23.50 Hermes Portfolio</b>, Potential Return: <b style="color:var(--green);">GHS 40.83</b>) with <b style="color:var(--green);">GHS 11.81 untouched cash reserve</b>.
+        <b style="color: var(--green);">🟢 SATURDAY 19:50 GMT LIVE IN-PLAY TELEMETRY:</b> <b style="color:#fff;">Leg 1 of Ticket 1 (Norway 3–1 Wales) WON!</b> Algeria vs Togo is at <b style="color:var(--amber);">Halftime (0–0)</b> with Ticket 1 (`BL1V9Q`, Stake GHS 11.00) already offering a profitable <b style="color:var(--green);">GHS 11.12 Cashout</b> (Potential Win: <b style="color:var(--green);">GHS 17.58</b>). Meanwhile, the 19:45 GMT UEFA Nations League window (<b style="color:#fff;">Portugal vs Denmark, Romania vs Poland, Sweden vs Bosnia</b>) has just kicked off (5' 1H)!
       </div>
     </div>
 
     <!-- TODAY'S 4-TICKET EXECUTION BOARD (SATURDAY NOV 14, 2026) -->
     <div class="section-title">
-      <span>🎯 Active 4-Tier Execution Board // Saturday International Football &amp; NBA Slate (Nov 14, 2026)</span>
-      <span class="tag" style="background:var(--green-glow); color:var(--green); border-color:rgba(16,185,129,0.35);">6 SLIPS BOOKED • SPORTYBET GHANA ORDER COMPLETE</span>
+      <span>🎯 Live 4-Tier Execution Board // Saturday International Football &amp; NBA Slate (Nov 14, 2026 • 19:50 GMT)</span>
+      <span class="tag" style="background:var(--green-glow); color:var(--green); border-color:rgba(16,185,129,0.35);">5 HERMES SLIPS LIVE IN-PLAY • 1 SETTLED</span>
     </div>
 
     <section class="slips-grid">
@@ -290,32 +290,32 @@
         <div>
           <div class="slip-head">
             <span class="slip-name text-green">TICKET 1 (PLAN A): THE FORTRESS VAULT GRINDER</span>
-            <span class="badge badge-green">✅ BOOKED • CODE: BL1V9Q • COMB: 1.57</span>
+            <span class="badge badge-green">🟢 LEG 1 WON • LEG 2 HT (0-0) • CODE: BL1V9Q</span>
           </div>
           <div class="slip-legs">
             <div class="leg-row">
               <div>
-                <div class="leg-match">Norway vs Wales (17:00 GMT)</div>
+                <div class="leg-match">✅ Norway vs Wales (3–1 FT) — LEG 1 WON!</div>
                 <div class="leg-path">Football ➔ International ➔ UEFA Nations League ➔ Main ➔ 1X2: Home (Norway) @ 1.28</div>
-                <div class="leg-pick text-green">Haaland &amp; Ødegaard home attacking dominance in Oslo vs low-block Wales.</div>
+                <div class="leg-pick text-green">Dominant 3–1 victory in Oslo locked in Leg 1 of the Vault Grinder!</div>
               </div>
-              <div class="leg-score" style="color:var(--green);">17:00 GMT<br><span style="font-size:10px;">@ 1.28</span></div>
+              <div class="leg-score text-green">WON (3–1)<br><span style="font-size:10px;">✓ @ 1.28</span></div>
             </div>
             <div class="leg-row">
               <div>
-                <div class="leg-match">Algeria vs Togo (19:00 GMT)</div>
+                <div class="leg-match">🔴 LIVE: Algeria vs Togo (0–0 HT)</div>
                 <div class="leg-path">Football ➔ International ➔ AFCON Qualification ➔ Main ➔ 1X2: Home (Algeria) @ 1.23</div>
-                <div class="leg-pick text-green">Fortress home qualifier record &amp; superior squad depth across all thirds.</div>
+                <div class="leg-pick text-amber">Currently at Halftime (0–0); second-half Algiers home pressure incoming.</div>
               </div>
-              <div class="leg-score" style="color:var(--green);">19:00 GMT<br><span style="font-size:10px;">@ 1.23</span></div>
+              <div class="leg-score text-amber">HT (0–0)<br><span style="font-size:10px;">@ 1.23</span></div>
             </div>
           </div>
           <div class="commentary-box">
-            <div class="commentary-item">🔒 VAULT PROTOCOL: 2 dominant home national team anchors. Booked Receipt: BL1V9Q.</div>
+            <div class="commentary-item">🔒 LIVE CASHOUT AUDIT: SportyBet is currently offering <b>GHS 11.02–11.12</b> cashout on our GHS 11.00 stake. Letting Algeria ride into 2nd Half for full <b>GHS 17.58</b> payout!</div>
           </div>
         </div>
         <div class="slip-foot">
-          <span style="color: var(--text-muted);">Stake: <b>GHS 11.00</b></span>
+          <span style="color: var(--text-muted);">Stake: <b>GHS 11.00</b> | Live Cashout: <b class="text-green">GHS 11.12</b></span>
           <span class="cashout-pill" style="color:var(--green); border-color:rgba(16,185,129,0.3);">POT. RETURN: GHS 17.58</span>
         </div>
       </div>
@@ -325,41 +325,41 @@
         <div>
           <div class="slip-head">
             <span class="slip-name" style="color: var(--blue);">TICKET 2 (PLAN B): SHARP SINGLES MATRIX (3 SLIPS)</span>
-            <span class="badge badge-blue">✅ 3 BOOKED SINGLES • TOTAL STAKE: GHS 7.50</span>
+            <span class="badge badge-blue">🔴 2B &amp; 2C LIVE (5' 1H) • 2A SETTLED</span>
           </div>
           <div class="slip-legs">
             <div class="leg-row">
               <div>
-                <div class="leg-match">Single 2A: Uganda vs Botswana (16:00 GMT) [CODES: EZ2XES + FD7V2L]</div>
+                <div class="leg-match">Single 2A: Uganda vs Botswana (1–1 FT) [CODES: EZ2XES + FD7V2L]</div>
                 <div class="leg-path">Football ➔ International ➔ AFCON Qualification ➔ Main ➔ 1X2: Home (Uganda) @ 1.60</div>
-                <div class="leg-pick text-green">High-altitude Kampala home edge &amp; defensive organization vs Botswana.</div>
+                <div class="leg-pick text-red">✗ MISSED: Finished 1–1 draw at full time.</div>
               </div>
-              <div class="leg-score" style="color:var(--blue);">GHS 2.50<br><span style="font-size:10px;">POT. GHS 4.14</span></div>
+              <div class="leg-score text-red">LOST (1–1)<br><span style="font-size:10px;">-GHS 2.50</span></div>
             </div>
             <div class="leg-row">
               <div>
-                <div class="leg-match">Single 2B: Portugal vs Denmark (19:45 GMT) [CODE: A9ZRR7]</div>
+                <div class="leg-match">🔴 Single 2B: Portugal vs Denmark (0–0, 5' 1H) [CODE: A9ZRR7]</div>
                 <div class="leg-path">Football ➔ International ➔ UEFA Nations League ➔ Main ➔ 1X2: Home (Portugal) @ 1.60</div>
-                <div class="leg-pick text-green">Elite possession &amp; wing creation in Lisbon against Danish midfield block.</div>
+                <div class="leg-pick text-green">Just kicked off in Lisbon! Live Cashout: GHS 2.21.</div>
               </div>
-              <div class="leg-score" style="color:var(--blue);">GHS 2.50<br><span style="font-size:10px;">POT. GHS 4.00</span></div>
+              <div class="leg-score" style="color:var(--blue);">LIVE 5'<br><span style="font-size:10px;">POT. GHS 4.00</span></div>
             </div>
             <div class="leg-row">
               <div>
-                <div class="leg-match">Single 2C: Romania vs Poland (19:45 GMT) [CODE: FQ3LEM]</div>
+                <div class="leg-match">🔴 Single 2C: Romania vs Poland (0–0, 5' 1H) [CODE: FQ3LEM]</div>
                 <div class="leg-path">Football ➔ International ➔ UEFA Nations League ➔ Main ➔ 1X2: Away (Poland) @ 1.75</div>
-                <div class="leg-pick text-green">Clinical Polish transition finishing &amp; xG differential edge.</div>
+                <div class="leg-pick text-green">Just kicked off! Live Cashout already above stake at <b>GHS 2.61</b> (on GHS 2.50 stake).</div>
               </div>
-              <div class="leg-score" style="color:var(--blue);">GHS 2.50<br><span style="font-size:10px;">POT. GHS 4.38</span></div>
+              <div class="leg-score text-green">LIVE 5'<br><span style="font-size:10px;">POT. GHS 4.38</span></div>
             </div>
           </div>
           <div class="commentary-box">
-            <div class="commentary-item">🎯 SINGLES VALUE INSULATION: 3 completely isolated single tickets booked independently.</div>
+            <div class="commentary-item">🎯 SINGLES IN-PLAY: Both Portugal (`A9ZRR7`) and Poland (`FQ3LEM`) are live in the 1st half (combined potential return: <b>GHS 8.38</b>).</div>
           </div>
         </div>
         <div class="slip-foot">
-          <span style="color: var(--text-muted);">Total Staked: <b>GHS 7.50</b></span>
-          <span class="cashout-pill" style="color:var(--blue); border-color:rgba(56,189,248,0.3);">MAX POT. RETURN: GHS 12.52</span>
+          <span style="color: var(--text-muted);">Active Singles Staked: <b>GHS 5.00</b></span>
+          <span class="cashout-pill" style="color:var(--blue); border-color:rgba(56,189,248,0.3);">ACTIVE POT. RETURN: GHS 8.38</span>
         </div>
       </div>
 
@@ -368,22 +368,22 @@
         <div>
           <div class="slip-head">
             <span class="slip-name text-amber">TICKET 3 (PLAN C): CROSS-SPORT MULTIPLIER</span>
-            <span class="badge badge-amber">✅ BOOKED • CODE: 8U8AMD • COMB: 2.27</span>
+            <span class="badge badge-amber">🔴 LEG 1 LIVE (5' 1H) • CODE: 8U8AMD • COMB: 2.27</span>
           </div>
           <div class="slip-legs">
             <div class="leg-row">
               <div>
-                <div class="leg-match">Leg 1: Sweden vs Bosnia &amp; Herzegovina (19:45 GMT)</div>
+                <div class="leg-match">🔴 Leg 1: Sweden vs Bosnia &amp; Herzegovina (0–0, 5' 1H)</div>
                 <div class="leg-path">Football ➔ International ➔ UEFA Nations League ➔ Main ➔ 1X2: Home (Sweden) @ 1.48</div>
-                <div class="leg-pick text-green">Gyökeres &amp; Isak home pace mismatch in Stockholm.</div>
+                <div class="leg-pick text-green">Underway in Stockholm (5' 1st Half).</div>
               </div>
-              <div class="leg-score" style="color:var(--amber);">19:45 GMT<br><span style="font-size:10px;">@ 1.48</span></div>
+              <div class="leg-score" style="color:var(--amber);">LIVE 5'<br><span style="font-size:10px;">@ 1.48</span></div>
             </div>
             <div class="leg-row">
               <div>
                 <div class="leg-match">Leg 2: Haiti vs USA (21:30 GMT)</div>
                 <div class="leg-path">Football ➔ International ➔ CONCACAF Nations League ➔ Main ➔ 1X2: Away (USA) @ 1.30</div>
-                <div class="leg-pick text-green">Pochettino first-choice USMNT roster vs CONCACAF opposition.</div>
+                <div class="leg-pick text-green">Kicks off in 1h 40m; Pochettino first-choice USMNT roster.</div>
               </div>
               <div class="leg-score" style="color:var(--amber);">21:30 GMT<br><span style="font-size:10px;">@ 1.30</span></div>
             </div>
@@ -397,11 +397,11 @@
             </div>
           </div>
           <div class="commentary-box">
-            <div class="commentary-item">⚡ HEURISTIC #2 PRE-NBA CASHOUT LOCK: Audit cashout at 23:30 GMT after Sweden &amp; USA settle! Code: 8U8AMD.</div>
+            <div class="commentary-item">⚡ HEURISTIC #2 PRE-NBA CASHOUT LOCK: Will audit cashout at 23:30 GMT after Sweden &amp; USA settle! Code: 8U8AMD.</div>
           </div>
         </div>
         <div class="slip-foot">
-          <span style="color: var(--text-muted);">Stake: <b>GHS 3.75</b></span>
+          <span style="color: var(--text-muted);">Stake: <b>GHS 3.75</b> | Cashout: <b>GHS 3.41</b></span>
           <span class="cashout-pill" style="color:var(--amber); border-color:rgba(245,158,11,0.3);">POT. RETURN: GHS 8.62</span>
         </div>
       </div>
@@ -411,7 +411,7 @@
         <div>
           <div class="slip-head">
             <span class="slip-name" style="color:var(--purple);">TICKET 4 (PLAN D): NBA NIGHT CONTENDER DOUBLE</span>
-            <span class="badge badge-purple">✅ BOOKED • CODE: 8QZCUM • COMB: 1.69</span>
+            <span class="badge badge-purple">⏳ TIPS OFF 01:00 GMT • CODE: 8QZCUM • COMB: 1.69</span>
           </div>
           <div class="slip-legs">
             <div class="leg-row">
@@ -542,7 +542,7 @@
       </div>
       <div class="matrix-item">
         <div class="matrix-label">Real Sport Winnings</div>
-        <div class="matrix-value text-green">GHS 1382.39</div>
+        <div class="matrix-value text-green">GHS 1384.90</div>
         <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">80.9% of Payouts</div>
       </div>
       <div class="matrix-item">
@@ -990,7 +990,7 @@
     </section>
 
     <footer class="footer">
-      BERMESI AUTONOMOUS ENGINE • PERSISTENT SQLITE DATABASE • ZERO SPORTYBET RISK • SYNC: 10:42 GMT
+      BERMESI AUTONOMOUS ENGINE • PERSISTENT SQLITE DATABASE • ZERO SPORTYBET RISK • SYNC: 19:53 GMT
     </footer>
 
   </div>
